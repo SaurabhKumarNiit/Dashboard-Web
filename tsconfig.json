@@ -1,9 +1,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"],
     "outDir": "./dist/out-tsc",
-    "baseUrl": "src",
+    "baseUrl": "./",
     "sourceMap": true,
+    "skipLibCheck": true,
     "declaration": false,
     "module": "es2020",
     "moduleResolution": "node",
@@ -14,9 +17,9 @@
       "es2020",
       "dom"
     ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    // "typeRoots": [
+    //   "node_modules/@types"
+    // ],
     "useDefineForClassFields": false
   }
 }
