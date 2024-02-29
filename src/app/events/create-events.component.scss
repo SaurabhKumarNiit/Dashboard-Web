@@ -1,0 +1,181 @@
+
+section{
+  margin-top: 55px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
+  .container-fluid{
+    width: 100%;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    animation: fadeIn 5s ease-out;
+  }
+  .container-fluid header{
+    font-size: 20px;
+    font-weight: 600;
+    // color: #fff;
+  }
+  .container-fluid header::before{
+   content: "";
+   position: absolute;
+   left: 0;
+   bottom: -2px;
+   height: 3px;
+   width: 197px;
+   border-radius: 8px;
+   background-color: #e50914;
+  }
+  .container-fluid form{
+    margin-top: 16px;
+    min-height: 490px;
+  }
+  
+  @media (min-width: 1025px) and (max-width: 1900px){
+  
+  .container-fluid{
+    position: relative;
+  }
+  .container-fluid header{
+    position: relative;
+  }
+  .container-fluid form{
+    position: relative;
+  }
+  small{
+    position: absolute;
+     margin-top: 74px;
+    margin-left: 10px;
+   color: #e50914;
+  }
+  
+  .merged-input {
+  padding-left: 25px;
+  }
+  .merged-input select{
+  padding-right: 40px;
+  margin-left: -23px;
+  }
+  
+  }
+  
+  .container-fluid form .details{
+    margin-top: 30px;
+  }
+  .container-fluid form .details.ID{
+    margin-top: 10px;
+  }
+  .container-fluid form .title{
+    display: block;
+    margin-bottom: 8px;
+   font-size: 16px;
+   font-weight: 500;
+   margin: 6px 0;
+  //    color: #fff;
+    
+  }
+  .container-fluid form .fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap:wrap;
+  }
+  form .fields .input-field{
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+  }
+  .input-field label{
+  animation: fadeInUp 1s ease-out;
+    font-size: 14px;
+    font-weight: bold;
+    // color: #fff ;
+  }
+  .input-field input ,textarea{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+    border-radius: 10px;
+  }
+  
+  .file-label input {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+    // background-color: #007bff;
+    // color: #fff;
+    // border: 1px solid black;
+   
+    cursor: pointer;
+   text-align: center;
+  }
+  
+  // input[type="file"] {
+  //   display: none;
+  // }
+  
+  textarea{
+  width: 100%;
+  height: 50px;
+  }
+  .input-field input:is(:focus, :valid){
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+  }
+  form button{
+    width: 30%;
+    padding: 15px 0;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    // color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 20px;
+    background: orangered;
+    margin: 25px 0 10px;
+    transition: 0.1s ease;
+    color: white;
+  }
+  form button:hover{
+    background: rgb(186, 55, 7);
+  }
+  
+  
+  @media screen and (max-width: 767px) {
+  small{
+   font-size: 13px;
+  display: block;
+  margin-left: 5px;
+  }
+  
+  form .fields .input-field{
+  width: 100%;
+  }
+  section{
+  margin-top: 10%;
+  }
+  .container-fluid header::before{
+  height: 1px;
+  width: 0px;
+  
+  }
+  .container-fluid form{
+  position: inherit;
+  }
+  }
+  .merged-input {
+  display: flex;
+  height: 43px;
+  }
+  
+  
+  

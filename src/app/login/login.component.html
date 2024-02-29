@@ -1,0 +1,49 @@
+<!-- <div class="bg-light min-vh-100 d-flex flex-row align-items-center" >
+  <div class="container-fluid">
+    <div class="justify-content-center" >
+      <div md="8" style="width: 700px;">
+        <div>
+          <div class="p-5">
+            <div>
+              <form cForm [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <h1>Login</h1>
+                <p class="text-medium-emphasis">Sign In to your account</p>
+                <div class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input autoComplete="sEmail" cFormControl type="email" id="sEmail" formControlName="sEmail" placeholder="Enter Your Email"/>
+                </div>
+                <div>
+                  <span xs="6">
+            
+                    <button cButton class="px-5" color="primary" type="submit" [disabled]="loginForm.invalid">Request OTP</button>
+                  </span>
+                </div>
+              </form>
+            </div>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <app-header></app-header> -->
+<div class="bg-img">
+  <div class="content">
+     <header class="text-dark">Login</header>
+     <form  class="login-form" [formGroup]="loginForm">
+        <div class="field">
+           <span class="fa fa-user"></span>
+           <input type="email" id="sEmail" formControlName="sEmail" placeholder="Enter Your Email"/>
+        </div>
+    
+        <br><br>
+        <div class="field" id="login">
+          <input  type="submit" (click)="onSubmit()" value="SUBMIT">
+       </div>
+     </form>
+  </div>
+</div>
+

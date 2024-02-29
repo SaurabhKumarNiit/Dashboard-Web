@@ -1,0 +1,21 @@
+.super{
+    background:blueviolet;
+    padding-top: 20px;
+}
+.main{
+
+   justify-content: center; display: flex; 
+   
+    height: 800px;
+}
+
+.midbar{
+ 
+    /* font-size: 500px; */
+  height: 500px;
+   margin: 0 40px 0 40px;
+   width: 10px;
+   border-radius: 10px;
+   background-color: white;
+   
+}

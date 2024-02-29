@@ -1,0 +1,117 @@
+/* your-component.component.css (or styles.css/styles.scss) */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+  .label {
+    margin-right: 0; /* Remove right margin on smaller screens */
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .buttons {
+    position: static; /* Remove absolute positioning on smaller screens */
+    align-items: flex-start; /* Align buttons to the left on smaller screens */
+    margin-top: 10px; /* Adjust spacing between items and buttons */
+  }
+}
+
+
+// ========================================
+
+.container {
+  margin-top: 50px;
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  background: transparent;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+.container .form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap:wrap;
+}
+
+.container .form .input-field{
+  display: flex;
+  width: calc(100% / 3 - 15px);
+  flex-direction: column;
+  margin: 4px 0;
+}
+
+.form .input-field {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-field label {
+  color: #333;
+}
+.funcButton{
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.form :where(.input-field input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #0c0101;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-field input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+/* .form .column {
+  display: flex;
+  column-gap: 15px;
+} */
+
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+.gender label {
+  color: #707070;
+}
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+
+/*Responsive*/
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+  .form :where(.gender-option, .gender) {
+    row-gap: 15px;
+  }
+}

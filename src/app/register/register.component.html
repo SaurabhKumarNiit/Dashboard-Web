@@ -1,0 +1,69 @@
+<!-- <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <div class="container-fluid">
+    <div class="justify-content-center">
+      <div lg="7" md="9" xl="6">
+        <div class="mx-4">
+          <div class="p-5">
+            <form cForm class="login-form" #otpForm="ngForm">
+              <h1>Submit OTP</h1>
+              <p class="text-medium-emphasis">Enter OTP for Login</p>
+              <div class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+
+                <input autoComplete="otp" cFormControl type="text" placeholder="Enter Your OTP" name="otp" [(ngModel)]="requestOTP.nOtp" required #otp="ngModel" [class.is-invalid]="otp.invalid && otp.touched"/>
+                <br>
+                <small *ngIf=" otp.touched && otp.invalid"  class="text-danger">required field *</small>
+              </div>
+              <div class="d-grid">
+                <button cButton color="success" class="button" type="submit" (click)="submitOtp()" [disabled]="otpForm.invalid" >
+                  Submit OTP
+                </button>
+              </div>
+            </form>
+            <br>
+            <div *ngIf="timer > 0">
+              <p style="color: black;">Time remaining: {{ timer }} seconds</p>
+            </div>
+           <button *ngIf="timer === 0" (click)="resendOtp()" style="border-radius: 5px; padding: 2px;background-color:transparent; color: black;">Resend OTP</button>
+           <div>
+              <label class="custom-checkbox">Remember me
+                <input type="checkbox" [(ngModel)]="requestOTP.bIsRememberMe">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="bg-img">
+  <div class="content">
+     <header class="text-dark">Submit OTP</header>
+      <form class="login-form" #otpForm="ngForm">
+        <div class="field">
+           <span class="fa fa-user"></span>
+           <input  type="text" placeholder="Enter Your OTP" name="otp" [(ngModel)]="requestOTP.nOtp" required #otp="ngModel" [class.is-invalid]="otp.invalid && otp.touched"/>
+           <br>
+           <small *ngIf=" otp.touched && otp.invalid"  class="text-danger">required *</small>
+        </div>
+    
+        <br><br>
+        <div class="field" id="login">
+          <input  type="submit" (click)="submitOtp()" value="SUBMIT"  [disabled]="otpForm.invalid">
+       </div>
+     </form>
+     <div *ngIf="timer > 0">
+      <p style="color: black;">Time remaining: {{ timer }} seconds</p>
+    </div>
+   <input type="submit" *ngIf="timer === 0" (click)="resendOtp()" style="border-radius: 5px; padding: 2px;background-color:transparent; color: black;"/>
+   <div>
+      <label class="custom-checkbox">Remember me
+        <input type="checkbox" [(ngModel)]="requestOTP.bIsRememberMe">
+        <span class="checkmark"></span>
+      </label>
+    </div>
+  </div>
+</div> -->

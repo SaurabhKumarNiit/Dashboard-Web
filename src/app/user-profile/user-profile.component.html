@@ -1,0 +1,231 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Edit Profile</h4>
+                      <p class="card-category">Complete your profile</p>
+                  </div>
+                  <!-- <div class="card-body">
+                      <form [formGroup]="registrationForm" (ngSubmit)="verifydata()">
+                          <div class="row">
+                          
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Student Name" type="text" formControlName="studentName">
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Email address" type="email" formControlName="email">
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Year Of Study" type="text" formControlName="yearOfStudy">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Demo Time" type="text" formControlName="demoTime">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Phone No" type="number"  formControlName="phoneNo">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Address" type="text"   formControlName="address">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Next Step</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div> -->
+
+                  <mat-stepper #stepper>
+                    <mat-step [stepControl]="registrationForm" errorMessage="Name is required.">
+                      <form [formGroup]="registrationForm" (ngSubmit)="verifydata()">
+                        <div class="row">
+                        
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Student Name" type="text" formControlName="studentName">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Email address" type="email" formControlName="email">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Year Of Study" type="text" formControlName="yearOfStudy">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Demo Time" type="text" formControlName="demoTime">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Phone No" type="number"  formControlName="phoneNo">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Address" type="text"   formControlName="address">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Next Step</button> -->
+                        <button type="submit" mat-button matStepperNext>Next</button>
+                  
+                    </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+
+                      <div class="h-570 w-500 p-20 border">
+                        <h2>Submit Otp!</h2>
+                        <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+                          <!-- <div class="form-control">
+                            <input
+                              type="number"
+                              required
+                              formControlName="otp"
+                              placeholder="Enter OTP..."
+                            />
+                          </div> -->
+
+                            
+                          <div class="col-md-8">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Enter OTP" type="number"   formControlName="otp">
+                            </mat-form-field>
+                        </div>
+                          <!-- <button type="submit">Submit</button> -->
+                          <button mat-button matStepperNext>Next</button>
+
+                        </form>
+                        <div class="form-help">
+                          <!-- <button (click)="checkData()">Resend Otp</button> -->
+                          <!-- <button mat-button matStepperPrevious>Back</button> -->
+                        </div>
+                      </div>
+
+                      <!-- <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Fill out your address</ng-template>
+                        <mat-form-field>
+                          <mat-label>Address</mat-label>
+                          <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
+                                 required>
+                        </mat-form-field>
+                        <div>
+                          <p>Go to a different step to see the error state</p>
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form> -->
+                    </mat-step>
+                    <mat-step>
+                      <ng-template matStepLabel>Done</ng-template>
+                      <div class="h-570 w-500 p-20 border">
+                        <h2>Payment Details</h2>
+                        <form>
+                          <label for="name">Student Name</label>
+                
+                          <div class="form-control">
+                            <p>{{ customerName }}</p>
+                          </div>
+                          <label for="name">Email</label>
+                          <div class="form-control">
+                            <p>{{ userEmail }}</p>
+                          </div>
+                          <div class="form-controls">
+                            <label
+                              for="field"
+                              style="font-size: 16px; display: block; margin-bottom: 10px"
+                              >For future updates only</label
+                            >
+                
+                            <input
+                              type="radio"
+                              id="12_class"
+                              name="pre_book"
+                              value="12000"
+                              (change)="updateBillAmount(12000)"
+                            />
+                            <label for="12">Pre-book for 12 classes</label><br />
+                
+                            <input
+                              type="radio"
+                              id="25_class"
+                              name="pre_book"
+                              value="25000"
+                              (change)="updateBillAmount(25000)"
+                            />
+                            <label for="25">Pre-book for 25 classes</label><br />
+                
+                            <input
+                              type="radio"
+                              id="30_class"
+                              name="pre_book"
+                              value="30000"
+                              (change)="updateBillAmount(30000)"
+                            />
+                            <label for="30">Pre-book for 30 classes</label>
+                          </div>
+                
+                          <div>
+                            <p style="font-size: 15px">
+                              Total Amount : INR - <strong>{{ billAmount }}</strong>
+                            </p>
+                          </div>
+
+                            
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Enter Your Amount" type="text" formControlName="userAmount">
+                            </mat-form-field>
+                        </div>
+
+                          <button mat-raised-button color="primary" (click)="onSubmit()">CheckOut Now</button>
+                
+                          <div *ngIf="paymentState" style="text-align: center; max-width: 490px;">
+                            
+                              <p>Select Payment Method</p>
+                              <a  (click)="openLink()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png" alt="PayPal"> </a>
+                              <a  (click)="paymentConfirm()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Razorpay_logo.svg/1896px-Razorpay_logo.svg.png"  alt="Razorpay"> </a>
+                            </div>
+                          <!-- <button type="submit"  >Pay With Razorpay</button>  
+                                    <button (click)="paymentForPaypal()">Pay With PayPal</button>   -->
+                        </form>
+                      </div>
+                      <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button (click)="stepper.reset()">Reset</button>
+                      </div>
+                    </mat-step>
+                  </mat-stepper>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+
+

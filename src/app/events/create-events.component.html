@@ -1,0 +1,235 @@
+<!-- <div class="fade-in">
+  <section [@fadeIn]>
+    <div class="container-fluid">
+      <div class="card" style="height: 70px;">
+        <div class="card-header card-header-tabs card-header-danger">
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper" >
+                    <span class="nav-tabs-title" ><strong style="font-size: xx-large;">Create Event</strong></span>
+                </div>
+            </div>
+        </div>
+        </div>
+      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+        <div class="details ID">
+          <div class="fields">
+            <div class="input-field">
+              <label for="name">Event Name *</label>
+              <input
+                type="text"
+                id="sName"
+                formControlName="sName"
+                placeholder="Event Name"
+                required
+              />
+              <small
+                class="small"
+                *ngIf="
+                  eventForm.get('sName')?.invalid &&
+                  eventForm.get('sName')?.touched
+                "
+                class="error-message"
+              >
+                Event Name is required.
+              </small>
+            </div>
+
+            <div class="input-field">
+              <label for="sImage" class="file-label">
+                Select Image
+                <input type="file" id="sImage" formControlName="sImage" />
+              </label>
+            </div>
+
+            <div class="input-field">
+              <label for="sLogo" class="file-label">
+                Select Logo
+                <input type="file" id="sLogo" formControlName="sLogo" />
+              </label>
+            </div>
+
+            <div class="input-field">
+              <label for="sLocationPhysical">Physical Location *</label>
+              <input
+                type="text"
+                id="sLocationPhysical"
+                formControlName="sLocationPhysical"
+                placeholder="Physical Location"
+                required
+              />
+              <small
+                *ngIf="
+                  eventForm.get('sLocationPhysical')?.invalid &&
+                  eventForm.get('sLocationPhysical')?.touched
+                "
+                class="error-message"
+              >
+                Physical Location is required.
+              </small>
+            </div>
+
+            <div class="input-field">
+              <label for="sStartTime">Start Time *</label>
+              <input
+                type="text"
+                id="sStartTime"
+                formControlName="sStartTime"
+                placeholder="Start Time"
+                required
+              />
+            </div>
+
+            <div class="input-field">
+              <label for="sEndTime">End Time *</label>
+              <input
+                type="text"
+                id="sEndTime"
+                formControlName="sEndTime"
+                placeholder="End Time"
+              />
+            </div>
+
+            <div class="input-field">
+              <label for="sLocationDigital">Digital Location *</label>
+              <input
+                type="text"
+                id="sLocationDigital"
+                formControlName="sLocationDigital"
+                placeholder="Digital Location"
+                required
+              />
+              <small
+                *ngIf="
+                  eventForm.get('sLocationDigital')?.invalid &&
+                  eventForm.get('sLocationDigital')?.touched
+                "
+                class="error-message"
+              >
+                Digital Location is required.
+              </small>
+            </div>
+
+            <div class="input-field">
+              <label for="dStartDate">Start Date *</label>
+              <input
+                type="date"
+                id="dStartDate"
+                formControlName="dStartDate"
+                required
+              />
+            </div>
+
+            <div class="input-field">
+              <label for="dEndDate">End Date *</label>
+              <input type="date" id="dEndDate" formControlName="dEndDate" />
+            </div>
+
+         
+            <div class="input-field">
+              <label for="sLocationDescription">Location Description</label>
+              <input
+                type="text"
+                id="sLocationDescription"
+                formControlName="sLocationDescription"
+                placeholder="Location Description"
+              />
+            </div>
+
+            <div class="input-field">
+              <label for="dRegistrationOpens">Registration Starts Date *</label>
+              <input
+                type="date"
+                id="dRegistrationOpens"
+                formControlName="dRegistrationOpens"
+              />
+            </div>
+
+            <div class="input-field">
+              <label for="dRegistrationCloses"
+                >Registration Closes Date *</label
+              >
+              <input
+                type="date"
+                id="dRegistrationCloses"
+                formControlName="dRegistrationCloses"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form first">
+          <div class="input-field">
+            <label for="sDescription">Event Description *</label>
+            <textarea
+              id="sDescription"
+              formControlName="sDescription"
+              placeholder="Event Description"
+              required
+            ></textarea>
+            <small
+              *ngIf="
+                eventForm.get('sDescription')?.invalid &&
+                eventForm.get('sDescription')?.touched
+              "
+              class="error-message"
+            >
+              Event Description is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form first">
+          <span class="title">Additional Details</span>
+
+          <div class="fields">
+            <div class="input-field">
+              <label for="sCostDescription">Cost Description</label>
+              <input
+                type="text"
+                id="sCostDescription"
+                formControlName="sCostDescription"
+                placeholder="Cost Description"
+              />
+            </div>
+
+            <div class="input-field">
+              <label for="Age Restricted">Age Restricted</label>
+              <mat-checkbox
+                class="example-margin"
+                color="primary"
+                formControlName="bAgeRestricted"
+                >Check!</mat-checkbox
+              >
+            </div>
+
+            <div class="input-field">
+              <label for="locCoordinates">locCoordinates type</label>
+              <div
+                formGroupName="locCoordinates"
+                style="display: flex; width: 100%"
+              >
+                <input
+                  type="text"
+                  id="coordinatesType"
+                  formControlName="type"
+                  placeholder="Coordinates Type"
+                  required
+                />
+                <input
+                  type="text"
+                  id="coordinates"
+                  formControlName="coordinates"
+                  placeholder="Coordinates"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: end">
+          <button type="submit">Create Event</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div> -->
