@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from 'app/Services/shared.service';
 import QRCode from 'qrcode'
 import { jwtDecode } from 'jwt-decode';
 import * as Chartist from 'chartist';
-import { ApiService } from 'app/Services/api-service.service';
+import { ApiService } from '../Services/api-service.service';
+import { SharedService } from '../Services/shared.service';
 
 @Component({
   selector: 'app-dashboard',

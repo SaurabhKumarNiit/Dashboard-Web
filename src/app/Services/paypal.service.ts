@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PaypalService {
-  private baseUrl = ' http://localhost:8181';
+  private baseUrl = 'https://talented-kick-production.up.railway.app';
   private paypalUrl='https://api-m.sandbox.paypal.com';
   // http://localhost:8181/token
 

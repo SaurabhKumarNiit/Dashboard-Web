@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from 'app/Services/api-service.service';
-import { CurrencyService } from 'app/Services/currency.service';
-import { PaypalService } from 'app/Services/paypal.service';
 import Swal from 'sweetalert2';
 declare var Razorpay: any;
 import * as $ from 'jquery';
+import { ApiService } from '../Services/api-service.service';
+import { PaypalService } from '../Services/paypal.service';
+import { CurrencyService } from '../Services/currency.service';
 
 
 
