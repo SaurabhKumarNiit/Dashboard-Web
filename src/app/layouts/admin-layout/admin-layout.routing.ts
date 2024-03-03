@@ -10,7 +10,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { QRDisplay } from 'app/qr-display/qr.component';
 import { SelectedEventComponent } from 'app/selected-event/selected-event.component';
-import { CreateEventsComponent } from 'app/events/create-events.component';
+// import { CreateEventsComponent } from 'app/events/create-events.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -56,7 +56,7 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'dashboard',      component: DashboardComponent },
-    { path: 'dashboard/add-event',component: CreateEventsComponent },
+    // { path: 'dashboard/add-event',component: CreateEventsComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },

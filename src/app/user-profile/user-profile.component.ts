@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 declare var Razorpay: any;
 import * as $ from 'jquery';
@@ -24,10 +24,11 @@ export class UserProfileComponent implements OnInit {
     private router: Router,
     private paypalService:PaypalService,
     private currencyService: CurrencyService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private route: ActivatedRoute
     // private sharedService:SharedService
   ) {}
-
+isEditable:boolean = false;
 paymentState:boolean=false;
   data: any;
   userBookedSlot:any;
@@ -63,8 +64,31 @@ paymentState:boolean=false;
       console.log(this.generatedAccessToken);
     })
   }
-
+urlTokenId:any;
   ngOnInit(): void {
+
+    const url = 'https://example.com/return?token=6GT69374B0243392R&PayerID=9L5ZFFG8LPWSS';
+
+// Create a URLSearchParams object from the URL
+const urlObject = new URL(url);
+
+// Get the values of 'token' and 'PayerID' from the URL
+const token = urlObject.searchParams.get('token');
+const payerId = urlObject.searchParams.get('PayerID');
+
+// Log the values to the console or use them as needed
+console.log('Token:', token);
+console.log('PayerID:', payerId);
+
+    // this.route.queryParams.subscribe(params => {
+    //   this.urlTokenId = params['token'];
+    //   const payerId = params['PayerID'];
+
+    //   console.log('Token:', this.urlTokenId);
+    //   console.log('PayerID:', payerId);
+
+    // });
+
     this.convert();
     this.paymentForPaypal();
     // this.sharedService.currentToken.subscribe((GeneretedId: string) => {
@@ -112,7 +136,7 @@ paymentState:boolean=false;
         }),
       ]),
       application_context: this.fb.group({
-        return_url: ['https://example.com/return', Validators.required],
+        return_url: ['https://saurabhkumarniit.github.io/Dashboard-Web/#/thank-you', Validators.required],
         cancel_url: ['https://example.com/cancel', Validators.required],
       }),
     });
@@ -138,7 +162,9 @@ readyLink:any;
     this.paypalService.createOrder(this.orderForm.value,this.generatedAccessToken).subscribe(res=>{
 
       // console.log(res.body.links.map((value:any)=>{console.log(value)}));
-      console.log(res.body.links);
+      this.urlTokenId=res.body.id;
+      console.log(this.urlTokenId);
+
       const desiredLinks = res.body.links.filter((link: { rel: string; }) => link.rel === 'approve');
        console.log(desiredLinks);
        this.redurectedLink=desiredLinks;
@@ -152,6 +178,13 @@ readyLink:any;
     //   const formData = this.orderForm.value;
     //   console.log(formData);
     // }
+  }
+dataPayment:any={}
+
+  submitPayment(){
+    this.paypalService.approveOrder(this.urlTokenId,this.dataPayment,this.generatedAccessToken).subscribe(res=>{
+      console.log(res);
+    })
   }
 
   openLink(){

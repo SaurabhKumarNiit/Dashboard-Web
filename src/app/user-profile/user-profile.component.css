@@ -3,7 +3,153 @@ img{
     border-radius: 10px;
     padding: 8px;
     border: 1px solid grey;
-    width: 100%;
+    width: 200px;
     line-height: 5px;
-    height: 60px;
+    height: 50px;
 }
+/* .control-form{
+    border: 1px solid#111;
+    border-radius: 20px;
+    padding: 10px;
+display: flex;
+ justify-content: space-between;
+}
+.form-fields{
+   
+    width: 100%;
+}
+.amount-input{
+
+}
+.form-controls{
+    border: 1px solid#111;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.amount{
+    border: 1px solid#111;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+} */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f8ea; /* Light green background color */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .payment {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+.paymentState{
+    display: flex;
+    cursor: pointer;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+  h2 {
+    color: #4CAF50; /* Light green heading color */
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .control-form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .form-fields {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+    
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .form-controls {
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgb(24, 24, 24);
+    margin-bottom: 20px;
+  }
+  /* .form-controls span{
+ 
+  } */
+
+  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 35px;
+  }
+
+  .amount {
+ text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .amount-input {
+    border: 1px solid#222222;
+    padding: 10px;
+    border-radius: 10px;
+    flex: 1;
+    margin-left: 10px;
+  }
+
+  /* .payment input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  } */
+
+  button {
+    background-color: #4CAF50; /* Light green button color */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+
+
+  /* Responsive styles */
+  @media screen and (max-width: 600px) {
+    .payment {
+      width: 100%;
+      
+    }
+  }

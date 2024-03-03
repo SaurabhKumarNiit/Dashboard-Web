@@ -9,6 +9,7 @@ export class PaypalService {
   private baseUrl = 'https://talented-kick-production.up.railway.app';
   private paypalUrl='https://api-m.sandbox.paypal.com';
   // http://localhost:8181/token
+  // https://api-m.sandbox.paypal.com/v2/checkout/orders/:order_id/capture
 
   constructor(private http: HttpClient) {}
 
@@ -35,6 +36,21 @@ export class PaypalService {
 
     return this.http.post(
       `${this.paypalUrl}/v2/checkout/orders`, 
+      data, 
+      { headers: httpHeaders, observe: 'response' }
+    );
+  }
+
+  approveOrder(order_id :any, data: any, accessToken: any): Observable<any> {
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+      'Prefer': 'return=representation',
+      'PayPal-Request-Id': 'VALUE=A_v4_style_guid,SCOPE=Globa',
+    });
+
+    return this.http.post(
+      `${this.paypalUrl}/v2/checkout/orders/${order_id}/capture`, 
       data, 
       { headers: httpHeaders, observe: 'response' }
     );

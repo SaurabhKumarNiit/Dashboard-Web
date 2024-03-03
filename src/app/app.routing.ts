@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { QRDisplay } from './qr-display/qr.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { CreateEventsComponent } from './events/create-events.component';
 
 const routes: Routes =[
   {
@@ -24,6 +25,11 @@ const routes: Routes =[
   {
     path: 'qr',
     component: QRDisplay
+  }
+  ,
+  {
+    path: 'thank-you',
+    component: CreateEventsComponent
   }
   ,
   {
