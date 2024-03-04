@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
 
   checkoutDisable:boolean=true;
   usdAmount: number=0;
-  isLinear = false;
+  isLinear = true;
   durationInSeconds = 5;
 
   constructor(
