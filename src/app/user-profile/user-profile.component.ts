@@ -203,7 +203,7 @@ dataPayment:any={}
 
   registrationForm = this.fb.group({
     studentName: ['', [Validators.required, Validators.minLength(5)]],
-    totalAmount: ['', [Validators.required]],
+    totalAmount: [''],
     email: ['', [Validators.required, Validators.email]],
     yearOfStudy: [''],
     address: [''],
