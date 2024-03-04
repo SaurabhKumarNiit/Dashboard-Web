@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
   usdAmount: number=0;
   isLinear = true;
   durationInSeconds = 5;
-
+  otpCheck=true;
   constructor(
     private fb: FormBuilder,
     private service: ApiService,
@@ -61,6 +61,8 @@ paymentState:boolean=false;
     this.isInputEmpty = this.billAmount === undefined || this.billAmount === null || this.billAmount.toString().trim() === '';
     console.log(this.isInputEmpty);
   }
+
+
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -228,7 +230,7 @@ dataPayment:any={}
   }
 
   registrationForm = this.fb.group({
-    studentName: ['', [Validators.required, Validators.minLength(5), this.noNumbersValidator]],
+    studentName: ['', [Validators.required, Validators.minLength(2), this.noNumbersValidator]],
     totalAmount: [''],
     email: ['', [Validators.required, Validators.email]],
     yearOfStudy: [''],
@@ -263,8 +265,13 @@ dataPayment:any={}
   // }
 
   otpForm = this.fb.group({
-    otp: ['', [Validators.required, Validators.minLength(4)]]
+    otp: ['']
   })
+  onOtpVerify(){
+    this.otpCheck=false;
+    this.isLinear=false;
+    console.log(this.otpCheck);
+  }
   get otp() {
     return this.otpForm.get('otp');
   }
@@ -356,12 +363,20 @@ dataPayment:any={}
             verticalPosition: 'top',
           });
           this.readyToPay=true;
+          this.otpCheck=false;
+
+          setTimeout(()=>{
+            this.isLinear=true;
+          },4000)
           // this.send();
           this.otpForm.reset();
           this.hideToPay=false;
+          this.isLinear=false;
 
         },
         (error) => {
+          this.otpCheck=true;
+          this.isLinear=true;
           this._snackBar.open('Please Enter Correct OTP!', 'Close', {
             duration: 4000,
             panelClass: ['error-snackbar'],

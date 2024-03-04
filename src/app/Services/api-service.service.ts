@@ -11,7 +11,8 @@ export class ApiService {
 
   data: any;
 
-  baseurl = 'https://talented-kick-production.up.railway.app';
+  // baseurl = 'https://talented-kick-production.up.railway.app';
+  baseurl='http://localhost:8181';
  
 
   getEmail() {

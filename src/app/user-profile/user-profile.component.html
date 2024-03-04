@@ -23,7 +23,7 @@
 
                     <span class="validator" *ngIf="f.studentName.invalid && (f.studentName.dirty || f.studentName.touched)">
                       <small *ngIf="f.studentName.errors.required">Name is required.   <br></small>
-                      <small *ngIf="f.studentName.errors.minlength">Name must be at least 5 characters long.    <br></small>
+                      <small *ngIf="f.studentName.errors.minlength">Name must be at least 2 characters long.    <br></small>
                       <small *ngIf="f.studentName.errors.noNumbers">Name cannot contain numbers.</small>
                     </span>
                 
@@ -85,17 +85,17 @@
                 <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
                   <div class="col-md-8">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Enter OTP" type="text" formControlName="otp" required>
+                      <input matInput placeholder="Enter OTP" type="number" formControlName="otp"  (input)="onOtpVerify()">
                     </mat-form-field>
 
-                    <span class="validator" *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
+                    <!-- <span class="validator" *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
                       <small *ngIf="otpValidation.otp.errors.required">OTP is required.<br></small>
                       <small *ngIf="otpValidation.otp.errors.minlength">OTP must be at least 4 numbers long.</small>
-                    </span>
+                    </span> -->
 
                   </div>
                   <!-- <button type="submit">Submit</button> -->
-                  <button type="submit" mat-button matStepperNext>Next</button>
+                  <button disabled="{{otpCheck}}" type="submit" mat-button matStepperNext>Next</button>
 
                 </form>
                 <div class="form-help">
