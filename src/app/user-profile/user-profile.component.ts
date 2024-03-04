@@ -38,7 +38,7 @@ isEditable:boolean = false;
 paymentState:boolean=false;
   data: any;
   userBookedSlot:any;
-  billAmount:any='00';
+  billAmount:any='';
   billAmountForPaypal:number=12000;
   userEmail:any;
   customerName:any;
@@ -50,6 +50,17 @@ paymentState:boolean=false;
   isLoading: boolean = false;
   generatedAccessToken:any;
 
+  additionalAmount:any={amount0:'3000',amount1:'5000',amount2:'7000',amount3:'10000',amount4:'20000',amount5:''}
+   
+ 
+  
+
+  isInputEmpty = true;
+
+  onInputChange() {
+    this.isInputEmpty = this.billAmount === undefined || this.billAmount === null || this.billAmount.toString().trim() === '';
+    console.log(this.isInputEmpty);
+  }
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -104,10 +115,14 @@ console.log('PayerID:', payerId);
     // console.log(this.userBookedSlot);
     this.initForm();
   }
-  updateBillAmount(value: number) {
+  updateBillAmount(value: any) {
     this.billAmount = value;
 
-    this.checkoutDisable=false;
+    if(value==''){
+      this.isInputEmpty=true;
+    }else{
+      this.isInputEmpty=false;
+    }
   }
   // "studentName": null,
   // "yearOfStudy": null,
@@ -203,23 +218,23 @@ dataPayment:any={}
     this.usdAmount = this.currencyService.convertINRtoUSD(this.billAmountForPaypal);
     console.log(this.usdAmount);
   }
+  noNumbersValidator(control) {
+    const hasNumbers = /\d/.test(control.value);
+    return hasNumbers ? { 'noNumbers': true } : null;
+  }
+
+  get f() {
+    return this.registrationForm.controls;
+  }
 
   registrationForm = this.fb.group({
-    studentName: ['', [Validators.required, Validators.minLength(5)]],
+    studentName: ['', [Validators.required, Validators.minLength(5), this.noNumbersValidator]],
     totalAmount: [''],
     email: ['', [Validators.required, Validators.email]],
     yearOfStudy: [''],
     address: [''],
     demoTime: [''],
-    phoneNo: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(
-          /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/
-        ),
-      ],
-    ]
+    phoneNo: ['',[Validators.required, Validators.pattern(/^[0-9]+$/)]]
   });
 
   get studentName() {
@@ -252,6 +267,10 @@ dataPayment:any={}
   })
   get otp() {
     return this.otpForm.get('otp');
+  }
+
+  get otpValidation() {
+    return this.otpForm.controls;
   }
 
   checkData(){

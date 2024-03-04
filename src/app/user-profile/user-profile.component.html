@@ -20,11 +20,26 @@
                     <mat-form-field class="example-full-width">
                       <input matInput placeholder="Student Name" type="text" formControlName="studentName" required>
                     </mat-form-field>
+
+                    <span class="validator" *ngIf="f.studentName.invalid && (f.studentName.dirty || f.studentName.touched)">
+                      <small *ngIf="f.studentName.errors.required">Name is required.   <br></small>
+                      <small *ngIf="f.studentName.errors.minlength">Name must be at least 5 characters long.    <br></small>
+                      <small *ngIf="f.studentName.errors.noNumbers">Name cannot contain numbers.</small>
+                    </span>
+                
+                    
                   </div>
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width">
                       <input matInput placeholder="Email address" type="email" formControlName="email" required>
                     </mat-form-field>
+
+                    <span class="validator" *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                      <small *ngIf="f.email.errors.required">Email is required.   <br></small>
+                    
+                      <small *ngIf="f.email.errors.email">Email must be in correct formate 'user&#64;example.com'.</small>
+                    
+                    </span>
                   </div>
                 </div>
                 <div class="row">
@@ -42,12 +57,19 @@
                     <mat-form-field class="example-full-width">
                       <input matInput placeholder="Phone No" type="number" formControlName="phoneNo" required>
                     </mat-form-field>
+
+                    <span class="validator" *ngIf="f.phoneNo.invalid && (f.phoneNo.dirty || f.phoneNo.touched)">
+                      <small *ngIf="f.phoneNo.errors.required">Phone Number is required.<br></small>
+                    
+                      <small *ngIf="f.phoneNo.errors.pattern"> Phone number must contain only numeric values.</small>
+                    
+                    </span>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Address" type="text" formControlName="address">
+                      <input matInput placeholder="Address" type="number" formControlName="address">
                     </mat-form-field>
                   </div>
                 </div>
@@ -56,28 +78,24 @@
 
               </form>
             </mat-step>
-            <mat-step [stepControl]="secondFormGroup">
+            <mat-step [stepControl]="otpForm">
 
               <div>
                 <h2>Submit Otp!</h2>
                 <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
-                  <!-- <div class="form-control">
-                            <input
-                              type="number"
-                              required
-                              formControlName="otp"
-                              placeholder="Enter OTP..."
-                            />
-                          </div> -->
-
-
                   <div class="col-md-8">
                     <mat-form-field class="example-full-width">
                       <input matInput placeholder="Enter OTP" type="text" formControlName="otp" required>
                     </mat-form-field>
+
+                    <span class="validator" *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
+                      <small *ngIf="otpValidation.otp.errors.required">OTP is required.<br></small>
+                      <small *ngIf="otpValidation.otp.errors.minlength">OTP must be at least 4 numbers long.</small>
+                    </span>
+
                   </div>
                   <!-- <button type="submit">Submit</button> -->
-                  <button mat-button matStepperNext>Next</button>
+                  <button type="submit" mat-button matStepperNext>Next</button>
 
                 </form>
                 <div class="form-help">
@@ -108,7 +126,12 @@
                     update</h3>
                   <div class="form-controls">
 
-                    <span>
+                    <mat-radio-group class="radioGroup" [(ngModel)]="billAmount">
+                      <mat-radio-button (change)="updateBillAmount(12000)" class="example-margin" value="12000">Pre-book for 12 classes</mat-radio-button>
+                      <mat-radio-button (change)="updateBillAmount(25000)" class="example-margin" value="25000">Pre-book for 25 classes</mat-radio-button>
+                      <mat-radio-button (change)="updateBillAmount(30000)" class="example-margin" value="30000">Pre-book for 30 classes</mat-radio-button>
+                    </mat-radio-group>
+                    <!-- <span>
                       <input type="radio" id="12_class" name="pre_book" value="12000"
                         (change)="updateBillAmount(12000)" />
                       <label for="12">Pre-book for 12 classes</label><br />
@@ -124,7 +147,7 @@
                       <input type="radio" id="30_class" name="pre_book" value="30000"
                         (change)="updateBillAmount(30000)" />
                       <label for="30">Pre-book for 30 classes</label>
-                    </span>
+                    </span> -->
 
                   </div>
 
@@ -137,12 +160,31 @@
 
                     <small>Your Total Amount, You can all update your amount according your requirment.</small>
                     <div class="amount-input">
-                      <input style="font-weight: bold; font-size: large;" matInput placeholder="Enter Your Amount"
-                        type="text" [(ngModel)]="billAmount">
+                      <input
+                      style="font-weight: bold; font-size: large;"
+                      matInput
+                      placeholder="Enter Your Amount"
+                      type="text"
+                      [(ngModel)]="billAmount"
+                      (input)="onInputChange()"
+                    >
                     </div>
                   </div>
 
-                  <button mat-raised-button color="primary" (click)="onSubmit()" disabled="{{checkoutDisable}}">CheckOut Now</button>
+                  <div class="additional">
+                  
+                       <button (click)="updateBillAmount(additionalAmount.amount0)" >₹ {{additionalAmount.amount0}}</button>
+                       <button (click)="updateBillAmount(additionalAmount.amount1)" >₹ {{additionalAmount.amount1}}</button>
+                       <button (click)="updateBillAmount(additionalAmount.amount2)" >₹ {{additionalAmount.amount2}}</button>
+                       <button (click)="updateBillAmount(additionalAmount.amount3)" >₹ {{additionalAmount.amount3}}</button>
+                       <button (click)="updateBillAmount(additionalAmount.amount4)" >₹ {{additionalAmount.amount4}}</button>
+                       <button (click)="updateBillAmount(additionalAmount.amount5)" >Custom Amount</button>
+
+                  </div>
+
+                  
+
+                  <button mat-raised-button color="primary" (click)="onSubmit()" disabled="{{isInputEmpty}}">CheckOut Now</button>
 
                   <div *ngIf="paymentState" style="text-align: center;">
 

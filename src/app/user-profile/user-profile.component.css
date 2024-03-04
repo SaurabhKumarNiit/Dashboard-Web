@@ -144,13 +144,35 @@ body {
   button:hover {
     background-color: #45a049; /* Darker green on hover */
   }
+  .validator small{
+    color: red;
+    font-weight: 600;
 
-
+  }
+  .additional {
+    display:flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+  }
+  .additional button{
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+  }
+mat-radio-button{
+  margin-right: 25px;
+}
   /* Responsive styles */
   @media screen and (max-width: 600px) {
     .payment {
       width: 100%;
       
+    }
+    .additional{
+      display: block;
+    }
+    .additional button{
+      width: 100%;
     }
   }
 

@@ -27,6 +27,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { QRCodeModule } from 'angularx-qrcode';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 @NgModule({
   imports: [
@@ -46,6 +48,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatStepperModule,
     MatDatepickerModule,
     MatSnackBarModule,
+    MatRadioModule,
     QRCodeModule
   ],
   declarations: [
