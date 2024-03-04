@@ -18,8 +18,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserProfileComponent implements OnInit {
 
+  checkoutDisable:boolean=true;
   usdAmount: number=0;
-  isLinear = true;
+  isLinear = false;
   durationInSeconds = 5;
 
   constructor(
@@ -105,6 +106,8 @@ console.log('PayerID:', payerId);
   }
   updateBillAmount(value: number) {
     this.billAmount = value;
+
+    this.checkoutDisable=false;
   }
   // "studentName": null,
   // "yearOfStudy": null,
