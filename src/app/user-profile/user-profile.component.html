@@ -7,51 +7,11 @@
             <!-- <h4 class="card-title"></h4> -->
             <p class="card-category">Complete your profile</p>
           </div>
-          <!-- <div class="card-body">
-                      <form [formGroup]="registrationForm" (ngSubmit)="verifydata()">
-                          <div class="row">
-                          
-                              <div class="col-md-6">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Student Name" type="text" formControlName="studentName">
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-6">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email address" type="email" formControlName="email">
-                                  </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Year Of Study" type="text" formControlName="yearOfStudy">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Demo Time" type="text" formControlName="demoTime">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Phone No" type="number"  formControlName="phoneNo">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-12">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Address" type="text"   formControlName="address">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Next Step</button>
-                          <div class="clearfix"></div>
-                      </form>
-                  </div> -->
 
-          <mat-stepper #stepper>
+          <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+                    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+                  </button> -->
+          <mat-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="registrationForm">
               <form [formGroup]="registrationForm" (ngSubmit)="verifydata()">
                 <div class="row">
@@ -75,7 +35,7 @@
                   </div>
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Demo Time" type="text" formControlName="demoTime">
+                      <input matInput placeholder="Demo Time" type="time" formControlName="demoTime">
                     </mat-form-field>
                   </div>
                   <div class="col-md-4">
@@ -161,7 +121,7 @@
                   <h3 for="field" style="font-size: 16px; display: block; margin-bottom: 10px">Select Option future
                     update</h3>
                   <div class="form-controls">
-                   
+
                     <span>
                       <input type="radio" id="12_class" name="pre_book" value="12000"
                         (change)="updateBillAmount(12000)" />
@@ -191,23 +151,25 @@
 
                     <small>Your Total Amount, You can all update your amount according your requirment.</small>
                     <div class="amount-input">
-                      <input style="font-weight: bold; font-size: large;" matInput placeholder="Enter Your Amount" type="text" [(ngModel)]= "billAmount">
+                      <input style="font-weight: bold; font-size: large;" matInput placeholder="Enter Your Amount"
+                        type="text" [(ngModel)]="billAmount">
                     </div>
                   </div>
 
                   <button mat-raised-button color="primary" (click)="onSubmit()">CheckOut Now</button>
 
-                  <div   *ngIf="paymentState" style="text-align: center;">
+                  <div *ngIf="paymentState" style="text-align: center;">
 
-                    <p style="background-color: #4CAF50; font-weight: bold; padding: 10px; color: white;" >Select One Payment Method</p>
-                  <div class="paymentState">
-                    <a (click)="openLink()"><img
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png"
-                      alt="PayPal"> </a>
-                  <a (click)="paymentConfirm()"><img
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Razorpay_logo.svg/1896px-Razorpay_logo.svg.png"
-                      alt="Razorpay"> </a>
-                  </div>
+                    <p style="background-color: #4CAF50; font-weight: bold; padding: 10px; color: white;">Select One
+                      Payment Method</p>
+                    <div class="paymentState">
+                      <a (click)="openLink()"><img
+                          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png"
+                          alt="PayPal"> </a>
+                      <a (click)="paymentConfirm()"><img
+                          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Razorpay_logo.svg/1896px-Razorpay_logo.svg.png"
+                          alt="Razorpay"> </a>
+                    </div>
                   </div>
                   <!-- <button type="submit"  >Pay With Razorpay</button>  
                                     <button (click)="paymentForPaypal()">Pay With PayPal</button>   -->

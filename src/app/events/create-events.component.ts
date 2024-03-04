@@ -6,6 +6,7 @@ import { ApiService } from '../Services/api-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaypalService } from '../Services/paypal.service';
 import { CurrencyService } from '../Services/currency.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class CreateEventsComponent {
     private paypalService:PaypalService,
     private currencyService: CurrencyService,
     private _formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
     // private sharedService:SharedService
   ) {}
 isEditable:boolean = false;
@@ -100,7 +102,12 @@ status: "COMPLETED",};
     console.log(this.dataPayment.id);
     this.paypalService.approveOrder(token,this.dataPayment,this.generatedAccessToken).subscribe(res=>{
       console.log(res);
-      Swal.fire("Payment Completed, done");
+      this._snackBar.open('Payment Completed', 'Close', {
+        duration: 4000,
+        panelClass: ['success-snackbar'],
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
     })
   }
 

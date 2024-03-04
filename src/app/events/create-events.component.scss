@@ -14,3 +14,7 @@
   background-color: rgb(236, 226, 209);
 
 }
+::ng-deep .success-snackbar {
+  background-color: rgb(4, 117, 4); /* Red background for errors */
+  color: #ffffff; /* White text for better visibility */
+}

@@ -26,6 +26,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatNativeDateModule} from '@angular/material/core';
 import { QRCodeModule } from 'angularx-qrcode';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatCardModule,
     MatStepperModule,
     MatDatepickerModule,
+    MatSnackBarModule,
     QRCodeModule
   ],
   declarations: [
@@ -55,7 +57,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    SelectedEventComponent,
+    // SelectedEventComponent,
     CreateEventsComponent,
     QRDisplay
   ]

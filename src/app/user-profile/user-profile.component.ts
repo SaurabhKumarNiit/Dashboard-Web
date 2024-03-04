@@ -7,6 +7,7 @@ import * as $ from 'jquery';
 import { ApiService } from '../Services/api-service.service';
 import { PaypalService } from '../Services/paypal.service';
 import { CurrencyService } from '../Services/currency.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -18,6 +19,9 @@ import { CurrencyService } from '../Services/currency.service';
 export class UserProfileComponent implements OnInit {
 
   usdAmount: number=0;
+  isLinear = true;
+  durationInSeconds = 5;
+
   constructor(
     private fb: FormBuilder,
     private service: ApiService,
@@ -25,6 +29,7 @@ export class UserProfileComponent implements OnInit {
     private paypalService:PaypalService,
     private currencyService: CurrencyService,
     private _formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar,
     private route: ActivatedRoute
     // private sharedService:SharedService
   ) {}
@@ -281,16 +286,16 @@ dataPayment:any={}
           this.MobileNo=data.phoneNo;
 
           this.readyToVerify=true;
-          Swal.fire({
-            title:
-              'Otp Send on your registered Email!',
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown',
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp',
-            },
+          // this._snackBar.open('OTP Send On Registered Email', 'Success', {
+          //   duration: 4000,
+          // });
+          this._snackBar.open('OTP Send On Registered Email', 'Close', {
+            duration: 4000,
+            panelClass: ['success-snackbar'],
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
           });
+          
           // this.paymentStart();
           // this.send();
           this.registrationForm.reset();
@@ -298,10 +303,14 @@ dataPayment:any={}
           // this.route.navigateByUrl('/login');
         },
         (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
+          // this._snackBar.open('Something went wrong!', 'Error', {
+          //   duration: 4000,
+          // });
+          this._snackBar.open('Something went wrong!', 'Close', {
+            duration: 5000,
+            panelClass: ['error-snackbar'],
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
           });
           this.isLoading=false;
         }
@@ -318,15 +327,11 @@ dataPayment:any={}
           console.log(data);
 
           // this.readyToVerify=true;
-          Swal.fire({
-            title:
-              'OTP Verified',
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown',
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp',
-            },
+          this._snackBar.open('OTP Verified', 'Close', {
+            duration: 4000,
+            panelClass: ['success-snackbar'],
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
           });
           this.readyToPay=true;
           // this.send();
@@ -335,10 +340,11 @@ dataPayment:any={}
 
         },
         (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Please Enter Correct OTP!',
+          this._snackBar.open('Please Enter Correct OTP!', 'Close', {
+            duration: 4000,
+            panelClass: ['error-snackbar'],
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
           });
         }
       );
@@ -439,7 +445,7 @@ dataPayment:any={}
             alert(response.error.reason);
             alert(response.error.metadata.order_id)
             alert(response.error.payment_id)
-            alert("Oops payment failed !!!!!!")
+            // alert("Oops payment failed !!!!!!")
          })
            rzp.open();
 
@@ -448,7 +454,7 @@ dataPayment:any={}
     
        error:function(error){
          console.log(error)
-         alert("sonthing went wrong !!")
+        //  alert("sonthing went wrong !!")
        }
     }
   )
@@ -463,12 +469,21 @@ dataPayment:any={}
           dataType:'json',
           success:function(response){
             console.log(response);
-            Swal.fire('Hey user!', 'Payment Completed', 'success');
-            
+            this._snackBar.open('Payment Success', 'Close', {
+              duration: 4000,
+              panelClass: ['success-snackbar'],
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
             setTimeout(() => {this.router.navigateByUrl('');}, 4000);
           },
           error:function (error){
-            Swal.fire('Hey user!', 'Updation Failed', 'info');
+            this._snackBar.open('Something went wrong!', 'Close', {
+              duration: 5000,
+              panelClass: ['error-snackbar'],
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
           },
           });
     }

@@ -62,7 +62,7 @@ body {
     justify-content: space-around;
 }
   h2 {
-    color: #4CAF50; /* Light green heading color */
+    color: #6A56A6; /* Light green heading color */
   }
 
   form {
@@ -153,3 +153,21 @@ body {
       
     }
   }
+
+/* Add global styles for custom snack bar classes */
+::ng-deep .error-snackbar {
+  background-color: rgb(152, 5, 5); /* Red background for errors */
+  color: #ffffff; /* White text for better visibility */
+}
+
+::ng-deep .success-snackbar {
+  background-color: rgb(4, 117, 4); /* Red background for errors */
+  color: #ffffff; /* White text for better visibility */
+}
+
+ .example-full-width input[type="time"] {
+  font-size: 20px; /* Adjust the font size as needed */
+/* Adjust the padding as needed */
+}
+
+
