@@ -69,23 +69,21 @@
                 <div class="row">
                   <div class="col-md-12">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Address" type="number" formControlName="address">
+                      <input matInput placeholder="Address" type="text" formControlName="address">
                     </mat-form-field>
                   </div>
                 </div>
                 <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Next Step</button> -->
-                <button type="submit" mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext>Next</button>
 
               </form>
             </mat-step>
-            <mat-step [stepControl]="otpForm">
-
-              <div>
-                <h2>Submit Otp!</h2>
+            <mat-step [stepControl]="otpForm" label="OTP !">
+                <!-- <h2>Submit Otp!</h2> -->
                 <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
                   <div class="col-md-8">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Enter OTP" type="number" formControlName="otp"  (input)="onOtpVerify()">
+                      <input matInput placeholder="Enter OTP" type="number" formControlName="otp"  required  (change)="onOtpVerify()">
                     </mat-form-field>
 
                     <!-- <span class="validator" *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
@@ -95,18 +93,23 @@
 
                   </div>
                   <!-- <button type="submit">Submit</button> -->
-                  <button disabled="{{otpCheck}}" type="submit" mat-button matStepperNext>Next</button>
+                  <button disabled="{{otpCheck}}"  mat-button matStepperNext>Next</button>
+                  <!-- <button mat-button matStepperNext>Next</button> -->
+
 
                 </form>
                 <div class="form-help">
                   <!-- <button (click)="checkData()">Resend Otp</button> -->
                   <!-- <button mat-button matStepperPrevious>Back</button> -->
                 </div>
-              </div>
+            
             </mat-step>
             <mat-step>
               <ng-template matStepLabel>Done</ng-template>
-              <div class="payment">
+              <div *ngIf="!readyToPay">
+            <h2>Please Fill Correct OTP to Generate Payment request</h2>
+              </div>
+              <div class="payment" *ngIf="readyToPay">
                 <h2>Payment Details</h2>
                 <form>
 
@@ -215,3 +218,4 @@
     </div>
   </div>
 </div>
+

@@ -67,9 +67,7 @@ paymentState:boolean=false;
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
+
 
 
   navigateToRegister(){
@@ -265,8 +263,13 @@ dataPayment:any={}
   // }
 
   otpForm = this.fb.group({
-    otp: ['']
+    otp: ['', [Validators.required]]
   })
+
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+
   onOtpVerify(){
     this.otpCheck=false;
     this.isLinear=false;
@@ -294,101 +297,120 @@ dataPayment:any={}
   verifydata() { 
       this.isLoading=true;
    
+      if(this.registrationForm.valid){
+        this.service
+        .registerCustomer({
+          studentName: this.studentName?.value,
+          email: this.email?.value,
+          phoneNo: this.phoneNo?.value,
+          totalAmount:this.totalAmount?.value,
+          yearOfStudy:this.yearOfStudy?.value,
+          demoTime:this.demoTime?.value,
+          address:this.address?.value
+        })
+        .subscribe(
+          (data) => {
+            console.log(data);
+            localStorage.setItem('email',data.email);
+            this.billAmount=data.totalAmount;
+            this.userEmail=data.email;
+            this.customerName=data.studentName;
+            this.MobileNo=data.phoneNo;
   
-    this.service
-      .registerCustomer({
-        studentName: this.studentName?.value,
-        email: this.email?.value,
-        phoneNo: this.phoneNo?.value,
-        totalAmount:this.totalAmount?.value,
-        yearOfStudy:this.yearOfStudy?.value,
-        demoTime:this.demoTime?.value,
-        address:this.address?.value
-      })
-      .subscribe(
-        (data) => {
-          console.log(data);
-          localStorage.setItem('email',data.email);
-          this.billAmount=data.totalAmount;
-          this.userEmail=data.email;
-          this.customerName=data.studentName;
-          this.MobileNo=data.phoneNo;
+            this.readyToVerify=true;
+            // this._snackBar.open('OTP Send On Registered Email', 'Success', {
+            //   duration: 4000,
+            // });
+            this._snackBar.open('OTP Send On Registered Email', 'Close', {
+              duration: 4000,
+              panelClass: ['success-snackbar'],
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+            
+            // this.paymentStart();
+            // this.send();
+            this.registrationForm.reset();
+            this.isLoading=false;
+            // this.route.navigateByUrl('/login');
+          },
+          (error) => {
+            // this._snackBar.open('Something went wrong!', 'Error', {
+            //   duration: 4000,
+            // });
+            this._snackBar.open('Something went wrong!', 'Close', {
+              duration: 5000,
+              panelClass: ['error-snackbar'],
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+            // this.isLoading=false;
+          }
+        );
+      }
+      else{
+        this._snackBar.open('Fill Required Details!', 'Close', {
+          duration: 5000,
+          panelClass: ['error-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      }
 
-          this.readyToVerify=true;
-          // this._snackBar.open('OTP Send On Registered Email', 'Success', {
-          //   duration: 4000,
-          // });
-          this._snackBar.open('OTP Send On Registered Email', 'Close', {
-            duration: 4000,
-            panelClass: ['success-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-          
-          // this.paymentStart();
-          // this.send();
-          this.registrationForm.reset();
-          this.isLoading=false;
-          // this.route.navigateByUrl('/login');
-        },
-        (error) => {
-          // this._snackBar.open('Something went wrong!', 'Error', {
-          //   duration: 4000,
-          // });
-          this._snackBar.open('Something went wrong!', 'Close', {
-            duration: 5000,
-            panelClass: ['error-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-          this.isLoading=false;
-        }
-      );
   }
 
   verifyOtp() { 
-    this.service
-      .verifyOtp({
-        otp: this.otp?.value,
-      })
-      .subscribe(
-        (data) => {
-          console.log(data);
+    // this.isLinear=false;
+ if(this.otpForm.valid){
+  this.service
+  .verifyOtp({
+    otp: this.otp?.value,
+  })
+  .subscribe(
+    (data) => {
+      console.log(data);
 
-          // this.readyToVerify=true;
-          this._snackBar.open('OTP Verified', 'Close', {
-            duration: 4000,
-            panelClass: ['success-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-          this.readyToPay=true;
-          this.otpCheck=false;
+      // this.readyToVerify=true;
+      this._snackBar.open('OTP Verified', 'Close', {
+        duration: 4000,
+        panelClass: ['success-snackbar'],
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+      this.readyToPay=true;
+      this.otpCheck=false;
 
-          setTimeout(()=>{
-            this.isLinear=true;
-          },4000)
-          // this.send();
-          this.otpForm.reset();
-          this.hideToPay=false;
-          this.isLinear=false;
+      // setTimeout(()=>{
+      //   this.isLinear=true;
+      // },3000)
+      // this.send();
+      this.otpForm.reset();
+      this.hideToPay=false;
+      
 
-        },
-        (error) => {
-          this.otpCheck=true;
-          this.isLinear=true;
-          this._snackBar.open('Please Enter Correct OTP!', 'Close', {
-            duration: 4000,
-            panelClass: ['error-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-        }
-      );
+    },
+    (error) => {
+      this.otpCheck=true;
+      // this.isLinear=true;
+      this._snackBar.open('Please Enter Correct OTP!', 'Close', {
+        duration: 4000,
+        panelClass: ['error-snackbar'],
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    }
+  );
+ }else{
+  this._snackBar.open('Form Not Valid!', 'Close', {
+    duration: 4000,
+    panelClass: ['error-snackbar'],
+    horizontalPosition: 'center',
+    verticalPosition: 'top',
+  });
+ }
   }
 
   paymentConfirm() { 
-  
     this.paymentStart();
 
   }
