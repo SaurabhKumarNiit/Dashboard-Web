@@ -18,7 +18,7 @@ export class ApiService {
 
   data: any;
 
-  baseurl = 'http://16.171.64.141:5002/api/v1';
+  baseurl = 'https://talented-kick-production.up.railway.app';
   
   originurl ='http://16.171.64.141:5002/api/v1';
 
@@ -47,9 +47,9 @@ export class ApiService {
     );
   }
 
-  login(loginData:any): Observable<any> {
+  adminlogin(loginData:any): Observable<any> {
     return this.http.post(
-      this.baseurl + '/auth/login', loginData, { headers, observe: 'response' }
+      this.baseurl + '/admin/login', loginData, { headers, observe: 'response' }
     );
   }
 

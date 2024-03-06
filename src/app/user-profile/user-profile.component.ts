@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild,Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -8,6 +8,7 @@ import { ApiService } from '../Services/api-service.service';
 import { PaypalService } from '../Services/paypal.service';
 import { CurrencyService } from '../Services/currency.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
 
 
 
@@ -17,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+  @ViewChild(MatStepper, { static: false }) stepper: MatStepper;
 
   checkoutDisable:boolean=true;
   usdAmount: number=0;
@@ -31,7 +33,8 @@ export class UserProfileComponent implements OnInit {
     private currencyService: CurrencyService,
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private renderer2:Renderer2
     // private sharedService:SharedService
   ) {}
 isEditable:boolean = false;
@@ -272,7 +275,6 @@ dataPayment:any={}
 
   onOtpVerify(){
     this.otpCheck=false;
-    this.isLinear=false;
     console.log(this.otpCheck);
   }
   get otp() {
@@ -295,7 +297,6 @@ dataPayment:any={}
   }
 
   verifydata() { 
-      this.isLoading=true;
    
       if(this.registrationForm.valid){
         this.service
@@ -331,7 +332,8 @@ dataPayment:any={}
             // this.paymentStart();
             // this.send();
             this.registrationForm.reset();
-            this.isLoading=false;
+            // this.isLoading=false;
+            this.isLoading=true;
             // this.route.navigateByUrl('/login');
           },
           (error) => {
@@ -359,6 +361,10 @@ dataPayment:any={}
 
   }
 
+  triggerButtonClick() {
+    this.stepper.next();
+  }
+
   verifyOtp() { 
     // this.isLinear=false;
  if(this.otpForm.valid){
@@ -384,6 +390,7 @@ dataPayment:any={}
       //   this.isLinear=true;
       // },3000)
       // this.send();
+      this.triggerButtonClick();
       this.otpForm.reset();
       this.hideToPay=false;
       
@@ -517,35 +524,37 @@ dataPayment:any={}
        }
     }
   )
-    function updatePaymentOnServer(payment_id:any,order_id:any,status:any) 
-    {
-      $.ajax(
-        {
-          url:'https://talented-kick-production.up.railway.app/payment/update_order',
-          data:JSON.stringify({payment_id:payment_id,order_id:order_id,statu:status}),
-          contentType:'application/json',
-          type:'POST',
-          dataType:'json',
-          success:function(response){
-            console.log(response);
-            this._snackBar.open('Payment Success', 'Close', {
-              duration: 4000,
-              panelClass: ['success-snackbar'],
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
-            });
-            setTimeout(() => {this.router.navigateByUrl('');}, 4000);
-          },
-          error:function (error){
-            this._snackBar.open('Something went wrong!', 'Close', {
-              duration: 5000,
-              panelClass: ['error-snackbar'],
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
-            });
-          },
-          });
-    }
+  function updatePaymentOnServer(payment_id: any, order_id: any, status: any) {
+    const self = this; // Preserve the component context
+  
+    $.ajax({
+      url: 'https://talented-kick-production.up.railway.app/payment/update_order',
+      data: JSON.stringify({ payment_id: payment_id, order_id: order_id, status: status }),
+      contentType: 'application/json',
+      type: 'POST',
+      dataType: 'json',
+      success: function (response) {
+        console.log(response);
+        self.router.navigateByUrl('https://saurabhkumarniit.github.io/Dashboard-Web/#/thank-you');
+        self._snackBar.open('Payment Success', 'Close', {
+          duration: 1000,
+          panelClass: ['success-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      },
+      error: function (error) {
+        self._snackBar.open('Something went wrong!', 'Close', {
+          duration: 5000,
+          panelClass: ['error-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      },
+    });
+  }
+  
+  
   
   };
 

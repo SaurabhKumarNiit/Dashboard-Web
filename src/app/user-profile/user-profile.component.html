@@ -12,7 +12,7 @@
                     {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
                   </button> -->
           <mat-stepper [linear]="isLinear" #stepper>
-            <mat-step [stepControl]="registrationForm">
+            <mat-step [stepControl]="otpForm">
               <form [formGroup]="registrationForm" (ngSubmit)="verifydata()">
                 <div class="row">
 
@@ -73,37 +73,44 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Next Step</button> -->
-                <button mat-button matStepperNext>Next</button>
+                <button type="submit">Send OTP</button>
 
+
+
+<div *ngIf="isLoading" style="margin-top: 50px;">
+  <h3>Submit Your OTP</h3>
+  <form style="text-align: center;" [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+    <div style="text-align: center; width: 100%;">
+      <mat-form-field  class="example-full-width">
+        <input matInput placeholder="Enter OTP" type="number" formControlName="otp"  required  (change)="onOtpVerify()">
+      </mat-form-field>
+
+      <span class="validator" *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
+        <small *ngIf="otpValidation.otp.errors.required">OTP is required.<br></small>
+        <small *ngIf="otpValidation.otp.errors.minlength">OTP must be at least 4 numbers long.</small>
+      </span>
+
+      <button type="submit" style="width: 100%;" >Submit OTP</button>
+
+    </div>
+  </form>
+
+
+  <button  style="width: 300px; display: none;" mat-button matStepperNext>Next</button>
+
+
+</div>
+            
               </form>
             </mat-step>
-            <mat-step [stepControl]="otpForm" label="OTP !">
-                <!-- <h2>Submit Otp!</h2> -->
-                <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
-                  <div class="col-md-8">
-                    <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Enter OTP" type="number" formControlName="otp"  required  (change)="onOtpVerify()">
-                    </mat-form-field>
-
-                    <!-- <span class="validator" *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
-                      <small *ngIf="otpValidation.otp.errors.required">OTP is required.<br></small>
-                      <small *ngIf="otpValidation.otp.errors.minlength">OTP must be at least 4 numbers long.</small>
-                    </span> -->
-
-                  </div>
-                  <!-- <button type="submit">Submit</button> -->
-                  <button disabled="{{otpCheck}}"  mat-button matStepperNext>Next</button>
-                  <!-- <button mat-button matStepperNext>Next</button> -->
-
-
-                </form>
+            <!-- <mat-step [stepControl]="otpForm" label="OTP !">
+             
                 <div class="form-help">
-                  <!-- <button (click)="checkData()">Resend Otp</button> -->
-                  <!-- <button mat-button matStepperPrevious>Back</button> -->
+                  <button (click)="checkData()">Resend Otp</button>
+                  <button mat-button matStepperPrevious>Back</button>
                 </div>
             
-            </mat-step>
+            </mat-step> -->
             <mat-step>
               <ng-template matStepLabel>Done</ng-template>
               <div *ngIf="!readyToPay">

@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    authToken: string='';
 
     constructor(location: Location,  private element: ElementRef, private router: Router) {
       this.location = location;
@@ -30,7 +31,7 @@ export class NavbarComponent implements OnInit {
             // denyButtonText: `No!`
           }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.removeItem('token');
+              sessionStorage.removeItem('current-token');
               Swal.fire("LogOut Success!", "", "success");
               this.router.navigateByUrl('/login');
 
@@ -41,6 +42,10 @@ export class NavbarComponent implements OnInit {
       }
 
     ngOnInit(){
+
+      this.authToken = sessionStorage.getItem('current-token');
+      console.log(this.authToken)
+
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];

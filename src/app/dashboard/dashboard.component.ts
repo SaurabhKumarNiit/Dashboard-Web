@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import QRCode from 'qrcode'
 import { jwtDecode } from 'jwt-decode';
 import * as Chartist from 'chartist';
-import { ApiService } from '../Services/api-service.service';
 import { SharedService } from '../Services/shared.service';
+import { ApiService } from '../Services/api-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,34 +14,43 @@ export class DashboardComponent implements OnInit {
 
   selected: Date | null;
   tokenFromLogin: string='';
-  authToken!: string | null;
+  authToken: string='';
   decodeData: any;
   greetingMessage: string;
   public myAngularxQrCode: string = 'null';
   constructor(private apiService:ApiService,  private sharedService: SharedService) {}
 
-  pastEventsArray: any[] = [];
-  upcomingEventsArray:any[]=[];
+  userDetailsArray: any[] = [];
+  paymentHistoryArray:any[]=[];
 
   dataAvailable: boolean = false;
  Eventlength:number=0;
 
-generateQr(){
-  QRCode.toCanvas(document.getElementById('canvas'), 'sample text', function (error) {
-    if (error) console.error(error)
-    console.log('success!');
-  })
-}
+
 
   ngOnInit() {
 
-      this.authToken = localStorage.getItem('token');
-      this.decodeData=jwtDecode(this.authToken as string)
-  
+      this.authToken = sessionStorage.getItem('current-token');
+      // this.decodeData=jwtDecode(this.authToken as string)
+      this.setGreetingMessage();
 
-    this.setGreetingMessage();
+      this.getUserData();
+      this.getPaymentHistory();
   }
 
+  getUserData(){
+this.apiService.getAllUserData().subscribe(res=>{
+  console.log(res);
+  this.userDetailsArray=res;
+})
+}
+
+  getPaymentHistory(){
+    this.apiService.getPaymentHistory().subscribe(res=>{
+      console.log(res);
+      this.paymentHistoryArray=res;
+    })
+  }
 
 
   setGreetingMessage() {

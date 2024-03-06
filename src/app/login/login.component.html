@@ -32,12 +32,16 @@
 <!-- <app-header></app-header> -->
 <div class="bg-img">
   <div class="content">
-     <header class="text-dark">Login</header>
+     <header class="text-dark">Admin Login</header>
      <form  class="login-form" [formGroup]="loginForm">
         <div class="field">
            <span class="fa fa-user"></span>
-           <input type="email" id="sEmail" formControlName="sEmail" placeholder="Enter Your Email"/>
+           <input type="email" id="sEmail" formControlName="email" placeholder="Enter Email For Admin Access"/>
         </div>
+        <div class="field">
+          <span class="fa fa-key"></span>
+          <input type="text" id="sPassword" formControlName="password" placeholder="Enter Password"/>
+       </div>
     
         <br><br>
         <div class="field" id="login">

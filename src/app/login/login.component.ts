@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '../Services/shared.service';
 import Swal from 'sweetalert2';
-import { ApiService } from 'app/Services/api-service.service';
+import { ApiService } from '../Services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -22,14 +22,11 @@ export class LoginComponent {
 
   loginForm!: FormGroup;
   
-  sendTokenToOtpVerify(): void {
-    // ... your code to generate and request OTP
-    const generatedToken = this.accessToken;
-    // console.log(generatedToken);
+  // sendTokenToOtpVerify(): void {
+  //   const generatedToken = this.accessToken;
   
-    // Send the token to the shared service
-    this.sharedService.updateToken(generatedToken);
-  }
+  //   this.sharedService.updateToken(generatedToken);
+  // }
 
     ngOnInit(): void {
     this.createLoginForm();
@@ -37,7 +34,8 @@ export class LoginComponent {
 
   createLoginForm(): void {
     this.loginForm = this.fb.group({
-      sEmail: ['', Validators.required]
+      email: ['', Validators.required,Validators.email],
+      password: ['', Validators.required]
     });
   }
 
@@ -59,34 +57,34 @@ export class LoginComponent {
 
   onSubmit() {
     console.log(this.loginForm.value);
-    // this.service.login(this.loginForm.value).subscribe(
-    //   (res: any) => {
-    //     //  console.log(res);
-    //     this.data = res;
-    //     this.accessToken = res.headers.get('Verification');
-    //     // console.log(this.accessToken);
-    //     localStorage.setItem('email', this.loginUser.sEmail);
+    this.service.adminlogin(this.loginForm.value).subscribe(
+      (res: any) => {
+         console.log(res.body.token);
+         sessionStorage.setItem('current-token',res.body.token);
+        this.data = res;
+        // this.accessToken = res.headers.get('Verification');
+        // console.log(this.accessToken);
+        sessionStorage.setItem('email', this.loginUser.sEmail);
 
-    //     Swal.fire({
-    //       title: 'OTP Sent Successfully',
-    //       showClass: {
-    //         popup: 'animate__animated animate__fadeInDown',
-    //       },
-    //       hideClass: {
-    //         popup: 'animate__animated animate__fadeOutUp',
-    //       },
-    //     });
-    //     this.sendTokenToOtpVerify();
-    //     this.router.navigateByUrl('/register');
-    //   },
-    //   (error) => {
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'Failed...',
-    //       text: 'You Not Have Access!',
-    //     });
-    //   }
-    // );
+        Swal.fire({
+          title: 'Admin Login Successfully',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown',
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp',
+          },
+        });
+        this.router.navigateByUrl('/dashboard');
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed...',
+          text: 'You Not Have Access!',
+        });
+      }
+    );
 
     
 
