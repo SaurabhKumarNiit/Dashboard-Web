@@ -2,13 +2,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+const headers = new HttpHeaders({
+  'Content-Type': 'application/json'
+});
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  
   data: any;
 
   baseurl = 'https://talented-kick-production.up.railway.app';
@@ -28,6 +34,23 @@ export class ApiService {
   registerCustomer(data: any) {
     // console.log(data);
     return this.http.post<any>(`${this.baseurl}/userRegister`, data);
+  }
+
+  authenticationRegisterCustomer(data: any) {
+    // console.log(data);
+    return this.http.post<any>(`${this.baseurl}/student/register`, data);
+  }
+
+  studentlogin(loginData:any): Observable<any> {
+    return this.http.post(
+      this.baseurl + '/student/login', loginData, { headers, observe: 'response' }
+    );
+  }
+
+  adminlogin(loginData:any): Observable<any> {
+    return this.http.post(
+      this.baseurl + '/admin/login', loginData, { headers, observe: 'response' }
+    );
   }
 
   updateData(data: any,_id:any) {

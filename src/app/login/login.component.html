@@ -32,22 +32,53 @@
 <!-- <app-header></app-header> -->
 <div class="bg-img">
   <div class="content">
-     <header class="text-dark">Admin Login</header>
-     <form  class="login-form" [formGroup]="loginForm">
+    <div style="display: flex; justify-content: space-between;">
+      <header class="text-light">{{currentLoginStatus}}</header>
+      <div style="cursor: pointer;">
+        <img (click)="changeCurrectStatus()" src="https://cdn-icons-png.flaticon.com/512/5509/5509361.png" width="30px" alt="">
+      </div>
+    </div>
+     <form  class="login-form" [formGroup]="loginForm" *ngIf="!changeStatus">
         <div class="field">
            <span class="fa fa-user"></span>
-           <input type="email" id="sEmail" formControlName="email" placeholder="Enter Email For Admin Access"/>
+           <input type="email" id="userEmail" formControlName="email" placeholder="Enter Email For Student Access" required/>
         </div>
+        
         <div class="field">
           <span class="fa fa-key"></span>
-          <input type="text" id="sPassword" formControlName="password" placeholder="Enter Password"/>
+          <input type="password" id="userPassword" formControlName="password" placeholder="Enter Password" required/>
        </div>
     
         <br><br>
         <div class="field" id="login">
-          <input  type="submit" (click)="onSubmit()" value="SUBMIT">
+          <input  type="submit" (click)="onStudentSubmit()" value="SUBMIT">
        </div>
      </form>
+
+     <form  class="login-form" [formGroup]="loginForm" *ngIf="changeStatus">
+      <div class="field">
+         <span class="fa fa-user"></span>
+         <input type="email" id="email" formControlName="email" placeholder="Enter Email For Admin Access" required/>
+      </div>
+      <div class="field">
+        <span class="fa fa-key"></span>
+        <input type="password" id="password" formControlName="password" placeholder="Enter Password" required/>
+     </div>
+  
+      <br><br>
+      <div class="field" id="login">
+        <input  type="submit" (click)="onSubmit()" value="SUBMIT">
+     </div>
+   </form>
+
+   <div *ngIf="!changeStatus">
+    <a href="/#/register"><small style="font-weight: bold; color: whitesmoke; text-decoration:underline;">New Student Sign UP Now</small></a>
+   </div>
+
+   <div *ngIf="changeStatus">
+    <a><small style="font-weight: bold; color: whitesmoke;">Hi, Admin Welcome</small></a>
+   </div>
+
   </div>
 </div>
 

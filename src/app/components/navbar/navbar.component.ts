@@ -41,6 +41,25 @@ export class NavbarComponent implements OnInit {
           });
       }
 
+      logOutStudent(){
+        Swal.fire({
+            title: "Are you sure want to LogOut!",
+            showDenyButton: true,
+            // showCancelButton: true,
+            confirmButtonText: "Yes",
+            // denyButtonText: `No!`
+          }).then((result) => {
+            if (result.isConfirmed) {
+              sessionStorage.removeItem('secureToken');
+              Swal.fire("LogOut Success!", "", "success");
+              this.router.navigateByUrl('/login');
+
+            } else if (result.isDenied) {
+              Swal.fire("Return to Dashboard", "", "info");
+            }
+          });
+      }
+
     ngOnInit(){
 
       this.authToken = sessionStorage.getItem('current-token');

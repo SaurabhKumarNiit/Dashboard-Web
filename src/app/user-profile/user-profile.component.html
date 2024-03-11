@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger">
+          <div class="card-header card-header-primary">
             <!-- <h4 class="card-title"></h4> -->
             <p class="card-category">Complete your profile</p>
           </div>
@@ -13,7 +13,188 @@
                   </button> -->
           <mat-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="otpForm">
-              <form [formGroup]="registrationForm" (ngSubmit)="verifydata()">
+<div class="fade-in"    *ngIf="!isLoading">
+  <section >
+    <div class="container-fluid">
+      <!-- <div class="card" style="height: 70px;">
+        <div class="card-header card-header-tabs card-header" style="background-color: #ebcb45;">
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <span class="nav-tabs-title"><strong style="font-size: xx-large;">Create Event</strong></span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <form class="mainForm" [formGroup]="registrationForm" (ngSubmit)="verifydata()">
+        <div class="details ID">
+          <!-- <span class="title">Basic Details</span> -->
+          <div class="fields">
+            <div class="input-field">
+              <label for="name">Student Name *</label>
+              <input type="text" id="sName" formControlName="studentName" placeholder="Student Name" required />
+              <small class="small" *ngIf="
+                  registrationForm.get('studentName')?.invalid &&
+                  registrationForm.get('studentName')?.touched
+                " class="error-message">
+                Student Name is required.
+              </small>
+            </div>
+
+            <div class="input-field">
+              <label for="name">Email *</label>
+              <input type="email" id="email" formControlName="email" placeholder="Email" required />
+              <small class="small" *ngIf="
+                  registrationForm.get('email')?.invalid &&
+                  registrationForm.get('email')?.touched
+                " class="error-message">
+                Email is required.
+              </small>
+            </div>
+
+            <div class="input-field">
+              <label for="parentName" class="file-label"> Parent Name  </label>
+                <input type="text" id="parentName" formControlName="parentName" placeholder="Parent Name" />
+            
+            </div>
+
+
+            <div class="input-field">
+              <label for="demoTime">Demo Time </label>
+              <input type="time" id="demoTime" formControlName="demoTime" placeholder="demoTime"/>
+            </div>
+
+
+            <div class="input-field">
+              <label for="yearOfStudy">Year Of Study </label>
+              <input type="date" id="yearOfStudy" formControlName="yearOfStudy"/>
+            </div>
+
+              <div class="input-field">
+                <label for="phoneNo">Phone Number</label>
+                <input type="number" id="phoneNo" formControlName="phoneNo"
+                  placeholder="Phone Number" required/>
+              </div>
+
+            <div class="input-field">
+              <label for="address">Address</label>
+              <input type="text" id="address" formControlName="address"/>
+            </div>
+
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<div style="margin-top: 40px;"  *ngIf="isLoading">
+  <h3 style="text-align: center; color: blueviolet;">Submit Your OTP</h3>
+  <form class="mainForm" [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+    <div class="fields">
+
+      <div  class="input-fielde">
+        <!-- <label for="otp">Enter Otp</label> -->
+        <div style="display: flex; justify-content: center;">
+          <input style="
+          width: 300px; 
+         outline: none;
+          font-size: 14px;
+          font-weight: 400;
+          color: #111;
+          border-radius: 10px;
+          border: 1px solid #111;
+          padding: 0 25px;
+          height: 42px;"  placeholder="Enter OTP" type="number" formControlName="otp"  required  (change)="onOtpVerify()">
+        </div>
+        <span class="validator" *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
+          <small *ngIf="otpValidation.otp.errors.required">OTP is required.<br></small>
+          <small *ngIf="otpValidation.otp.errors.minlength">OTP must be at least 4 numbers long.</small>
+        </span>
+      </div>
+
+   
+
+      <div style="display: flex; justify-content: center">
+        <button type="submit"  >Submit OTP</button>
+      </div>
+
+    </div>
+  </form>
+
+  <button  style="width: 300px; display: none;" mat-button matStepperNext>Next</button>
+
+</div>
+
+              <!-- <div class="mainpage">
+                <nav>
+                    <a href="#"><img src="..\images\logo.webp" alt=""></a>
+                </nav>
+                <div class="form-wrapper">
+                    <h2>
+                        Sign Up
+                    </h2>
+                    <form [formGroup]="registrationForm" (ngSubmit)="verifydata()" >
+                        <div class="form-control">
+                          <input placeholder="Student Name" type="text" formControlName="studentName" required>
+                                        
+                          <span class="validator" *ngIf="f.studentName.invalid && (f.studentName.dirty || f.studentName.touched)">
+                            <small *ngIf="f.studentName.errors.required">Name is required.   <br></small>
+                            <small *ngIf="f.studentName.errors.minlength">Name must be at least 2 characters long.    <br></small>
+                            <small *ngIf="f.studentName.errors.noNumbers">Name cannot contain numbers.</small>
+                          </span>
+                        </div>
+
+                        <div class="form-control">
+                          <input placeholder="Parent Name" type="text" formControlName="parentName">
+                           
+                        </div>
+
+              
+                
+                        <div class="form-control">
+                           
+                          <input placeholder="Email address" type="email" formControlName="email" required>
+                            
+                          <span class="validator" *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                            <small *ngIf="f.email.errors.required">Email is required.   <br></small>
+                          
+                            <small *ngIf="f.email.errors.email">Email must be in correct formate 'user&#64;example.com'.</small>
+                          
+                          </span>
+                        </div>
+              
+                        <div class="form-control">
+                          <input placeholder="Year Of Study" type="date" formControlName="yearOfStudy">
+                           
+                        </div>
+
+                        <div class="form-control">
+                          <input placeholder="Demo Time" type="time" formControlName="demoTime">
+                           
+                        </div>
+              
+
+                        <div class="form-control">
+                            <input type="number" required formControlName="phoneNo" placeholder="Phone No">
+              
+                            <span class="validator" *ngIf="f.phoneNo.invalid && (f.phoneNo.dirty || f.phoneNo.touched)">
+                              <small *ngIf="f.phoneNo.errors.required">Phone Number is required *<br></small>
+                            
+                              <small *ngIf="f.phoneNo.errors.pattern"> Phone number must contain only numeric values *</small>
+                            
+                            </span>
+                        </div>
+                
+                        <button type="submit"  >Submit</button>
+              
+                    </form>
+                </div>
+              </div> -->
+              <!-- <form [formGroup]="registrationForm" (ngSubmit)="verifydata()">
                 <div class="row">
 
                   <div class="col-md-6">
@@ -75,9 +256,9 @@
                 </div>
                 <button type="submit">Send OTP</button>
 
+                *ngIf="isLoading"
 
-
-<div *ngIf="isLoading" style="margin-top: 50px;">
+<div  style="margin-top: 50px;">
   <h3>Submit Your OTP</h3>
   <form style="text-align: center;" [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
     <div style="text-align: center; width: 100%;">
@@ -101,7 +282,7 @@
 
 </div>
             
-              </form>
+              </form> -->
             </mat-step>
             <!-- <mat-step [stepControl]="otpForm" label="OTP !">
              
@@ -113,7 +294,7 @@
             </mat-step> -->
             <mat-step>
               <ng-template matStepLabel>Done</ng-template>
-              <div *ngIf="!readyToPay">
+              <div *ngIf="!readyToPay" >
             <h2>Please Fill Correct OTP to Generate Payment request</h2>
               </div>
               <div class="payment" *ngIf="readyToPay">
@@ -168,10 +349,10 @@
                       </p>
                     </div> -->
 
-                    <small>Your Total Amount, You can all update your amount according your requirment.</small>
+                    <p style="font-size: 12px;">Your Total Amount, You can all update your amount according your requirment.</p>
                     <div class="amount-input">
                       <input
-                      style="font-weight: bold; font-size: large;"
+                      style="font-weight: bold; font-size: large; border: none;"
                       matInput
                       placeholder="Enter Your Amount"
                       type="text"

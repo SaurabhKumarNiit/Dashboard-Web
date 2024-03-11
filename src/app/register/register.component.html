@@ -1,69 +1,62 @@
-<!-- <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-  <div class="container-fluid">
-    <div class="justify-content-center">
-      <div lg="7" md="9" xl="6">
-        <div class="mx-4">
-          <div class="p-5">
-            <form cForm class="login-form" #otpForm="ngForm">
-              <h1>Submit OTP</h1>
-              <p class="text-medium-emphasis">Enter OTP for Login</p>
-              <div class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilUser"></svg>
-                </span>
+<div class="mainpage">
+  <nav>
+      <a href="#"><img src="..\images\logo.webp" alt=""></a>
+  </nav>
+  <div class="form-wrapper">
+      <h2>
+          Sign Up
+      </h2>
+      <form [formGroup]="registrationForm" (ngSubmit)="submitData()" >
+          <div class="form-control">
+              <input type="text" required formControlName="email" placeholder="Email">
 
-                <input autoComplete="otp" cFormControl type="text" placeholder="Enter Your OTP" name="otp" [(ngModel)]="requestOTP.nOtp" required #otp="ngModel" [class.is-invalid]="otp.invalid && otp.touched"/>
-                <br>
-                <small *ngIf=" otp.touched && otp.invalid"  class="text-danger">required field *</small>
-              </div>
-              <div class="d-grid">
-                <button cButton color="success" class="button" type="submit" (click)="submitOtp()" [disabled]="otpForm.invalid" >
-                  Submit OTP
-                </button>
-              </div>
-            </form>
-            <br>
-            <div *ngIf="timer > 0">
-              <p style="color: black;">Time remaining: {{ timer }} seconds</p>
-            </div>
-           <button *ngIf="timer === 0" (click)="resendOtp()" style="border-radius: 5px; padding: 2px;background-color:transparent; color: black;">Resend OTP</button>
-           <div>
-              <label class="custom-checkbox">Remember me
-                <input type="checkbox" [(ngModel)]="requestOTP.bIsRememberMe">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- <div class="bg-img">
-  <div class="content">
-     <header class="text-dark">Submit OTP</header>
-      <form class="login-form" #otpForm="ngForm">
-        <div class="field">
-           <span class="fa fa-user"></span>
-           <input  type="text" placeholder="Enter Your OTP" name="otp" [(ngModel)]="requestOTP.nOtp" required #otp="ngModel" [class.is-invalid]="otp.invalid && otp.touched"/>
-           <br>
-           <small *ngIf=" otp.touched && otp.invalid"  class="text-danger">required *</small>
-        </div>
+              <span class="validator" *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                <small *ngIf="f.email.errors.required">Email is required *   <br></small>
+              
+                <small *ngIf="f.email.errors.email">Email must be in correct formate user&#64;example.com *</small>
     
-        <br><br>
-        <div class="field" id="login">
-          <input  type="submit" (click)="submitOtp()" value="SUBMIT"  [disabled]="otpForm.invalid">
-       </div>
-     </form>
-     <div *ngIf="timer > 0">
-      <p style="color: black;">Time remaining: {{ timer }} seconds</p>
-    </div>
-   <input type="submit" *ngIf="timer === 0" (click)="resendOtp()" style="border-radius: 5px; padding: 2px;background-color:transparent; color: black;"/>
-   <div>
-      <label class="custom-checkbox">Remember me
-        <input type="checkbox" [(ngModel)]="requestOTP.bIsRememberMe">
-        <span class="checkmark"></span>
-      </label>
-    </div>
+              </span>
+          </div>
+
+  
+          <div class="form-control">
+             
+              <input type="text" required formControlName="password" placeholder="Password">
+              
+              <span class="validator" *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+                <small *ngIf="f.password.errors.required">Password is required *  <br></small>
+                <small *ngIf="f.password.errors.pattern">Incorrect Formate Your password length bwt 8-30 digit in this formate &#64;Password123 (uppercase, lowercase, numbers, and special characters).   <br></small>
+              </span>
+          </div>
+
+          <div class="form-control">
+              <input type="text" required formControlName="userName" placeholder="Name">
+             
+              <span class="validator" *ngIf="f.userName.invalid && (f.userName.dirty || f.userName.touched)">
+                <small *ngIf="f.userName.errors.required">Name is required *  <br></small>
+                <small *ngIf="f.userName.errors.minlength">Name must be at least 2 characters long *   <br></small>
+                <!-- <small *ngIf="f.userName.errors.noNumbers">Name cannot contain numbers.</small> -->
+              </span>
+          </div>
+
+          <div class="form-control">
+              <input type="number" required formControlName="phoneNo" placeholder="Phone No">
+
+              <span class="validator" *ngIf="f.phoneNo.invalid && (f.phoneNo.dirty || f.phoneNo.touched)">
+                <small *ngIf="f.phoneNo.errors.required">Phone Number is required *<br></small>
+              
+                <small *ngIf="f.phoneNo.errors.pattern"> Phone number must contain only numeric values *</small>
+              
+              </span>
+          </div>
+  
+          <button type="submit"  >Sign Up</button>
+          <!-- <button type="submit"  >Sign Up As Admin</button> -->
+  
+          <div class="form-help">
+              <a href="#">Need help?</a>
+              <a href="/#/login">Login</a>
+          </div>
+      </form>
   </div>
-</div> -->
+</div>

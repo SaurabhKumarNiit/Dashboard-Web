@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '../Services/shared.service';
 import Swal from 'sweetalert2';
-import { ApiService } from '../Services/api.service';
+import { ApiService } from '../Services/api-service.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,8 @@ import { ApiService } from '../Services/api.service';
 })
 export class LoginComponent {
   accessToken: any;
+  currentLoginStatus:any='Student Login';
+  changeStatus:boolean=false;
 
   constructor(
     private service: ApiService,
@@ -20,7 +22,9 @@ export class LoginComponent {
     private sharedService:SharedService
   ) {}
 
-  loginForm!: FormGroup;
+  // loginForm!: FormGroup;
+
+
   
   // sendTokenToOtpVerify(): void {
   //   const generatedToken = this.accessToken;
@@ -29,16 +33,27 @@ export class LoginComponent {
   // }
 
     ngOnInit(): void {
-    this.createLoginForm();
   }
 
-  createLoginForm(): void {
-    this.loginForm = this.fb.group({
+    loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['',[ Validators.required]]
+    });
+  
+
+    adminloginForm = this.fb.group({
       email: ['', Validators.required,Validators.email],
       password: ['', Validators.required]
     });
+  
+
+  get f() {
+    return this.loginForm.controls;
   }
 
+  get fa() {
+    return this.adminloginForm.controls;
+  }
   user: any;
   loggedIn: any;
 
@@ -54,20 +69,81 @@ export class LoginComponent {
   data: any;
   decodeData: any;
   userEmail: any;
+  changeCurrectStatus(){
+    if(this.currentLoginStatus=='Student Login'){
+
+      this.currentLoginStatus='Admin Login';
+      this.changeStatus=true
+
+      this.loginForm.reset;
+    }else{
+
+      this.currentLoginStatus='Student Login';
+      this.changeStatus=false
+      this.loginForm.reset;
+
+    }
+  }
 
   onSubmit() {
     console.log(this.loginForm.value);
-    this.service.adminlogin(this.loginForm.value).subscribe(
+ if(this.loginForm.valid){
+  this.service.adminlogin(this.loginForm.value).subscribe(
+    (res: any) => {
+       console.log(res.body.token);
+       sessionStorage.setItem('current-token',res.body.token);
+      this.data = res;
+      // this.accessToken = res.headers.get('Verification');
+      // console.log(this.accessToken);
+      sessionStorage.setItem('email', this.loginUser.sEmail);
+
+      Swal.fire({
+        title: 'Admin Login Successfully',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown',
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp',
+        },
+      });
+      this.router.navigateByUrl('/dashboard');
+    },
+    (error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed...',
+        text: 'Incorrect Email & Password!',
+      });
+    }
+  );
+ }else{
+  Swal.fire({
+    icon: 'error',
+    title: 'Failed...',
+    text: 'Please Fill Your Correct Email & Password!',
+  });
+ }
+
+    
+
+    // console.log('Response from server:', this.loginUser);
+    // console.log('Response from server:', this.requestOTP);
+  }
+
+  onStudentSubmit() {
+    console.log(this.loginForm.value);
+  if(this.loginForm.valid){
+    this.service.studentlogin(this.loginForm.value).subscribe(
       (res: any) => {
-         console.log(res.body.token);
-         sessionStorage.setItem('current-token',res.body.token);
+        //  console.log(res.body.token);
+         sessionStorage.setItem('secureToken',res.body.token);
         this.data = res;
         // this.accessToken = res.headers.get('Verification');
         // console.log(this.accessToken);
         sessionStorage.setItem('email', this.loginUser.sEmail);
 
         Swal.fire({
-          title: 'Admin Login Successfully',
+          title: 'Student Login Successfully',
           showClass: {
             popup: 'animate__animated animate__fadeInDown',
           },
@@ -75,16 +151,23 @@ export class LoginComponent {
             popup: 'animate__animated animate__fadeOutUp',
           },
         });
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/user-profile');
       },
       (error) => {
         Swal.fire({
           icon: 'error',
           title: 'Failed...',
-          text: 'You Not Have Access!',
+          text: 'Please Check Your Email & Password!',
         });
       }
     );
+  }else{
+    Swal.fire({
+      icon: 'error',
+      title: 'Failed...',
+      text: 'Please Fill Your Correct Email & Password!',
+    });
+  }
 
     
 

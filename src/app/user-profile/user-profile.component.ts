@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild,Renderer2 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 declare var Razorpay: any;
@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
 
   checkoutDisable:boolean=true;
   usdAmount: number=0;
-  isLinear = true;
+  isLinear = false;
   durationInSeconds = 5;
   otpCheck=true;
   constructor(
@@ -232,12 +232,14 @@ dataPayment:any={}
 
   registrationForm = this.fb.group({
     studentName: ['', [Validators.required, Validators.minLength(2), this.noNumbersValidator]],
+    parentName: [''],
     totalAmount: [''],
     email: ['', [Validators.required, Validators.email]],
     yearOfStudy: [''],
     address: [''],
     demoTime: [''],
-    phoneNo: ['',[Validators.required, Validators.pattern(/^[0-9]+$/)]]
+    phoneNo: ['',[Validators.required, Validators.pattern(/^[0-9]+$/)]],
+    paymentMethod:['']
   });
 
   get studentName() {

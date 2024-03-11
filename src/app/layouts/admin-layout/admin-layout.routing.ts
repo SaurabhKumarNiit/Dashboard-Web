@@ -8,8 +8,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { QRDisplay } from 'app/qr-display/qr.component';
-import { SelectedEventComponent } from 'app/selected-event/selected-event.component';
+import { AuthGuard } from '../../guard/auth.guard';
 // import { CreateEventsComponent } from 'app/events/create-events.component';
 
 export const AdminLayoutRoutes: Routes = [
@@ -57,13 +56,11 @@ export const AdminLayoutRoutes: Routes = [
     // }
     { path: 'dashboard',      component: DashboardComponent },
     // { path: 'dashboard/add-event',component: CreateEventsComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'table-list',     component: TableListComponent },
-    { path: 'typography',     component: TypographyComponent },
+    { path: 'user-profile',   component: UserProfileComponent, canActivate: [AuthGuard]},
+    { path: 'table-list',     component: TableListComponent , canActivate: [AuthGuard]},
+    { path: 'typography',     component: TypographyComponent , canActivate: [AuthGuard]},
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
-    { path: 'dashboard/qr',        component: QRDisplay },
-    {path: 'dashboard/:_id',component: SelectedEventComponent}
 ];

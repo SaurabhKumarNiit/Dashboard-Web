@@ -58,7 +58,7 @@ background-color: rgb(16, 128, 143);
   user-select: none;
 }
 .bg-img{
-  background-image: url('https://sprucegroveringette.com/cloud/sprucegroveringette/css/img/assocBGlogo.png');
+  background-image: url('https://woorise.com/wp-content/uploads/2021/03/Online-event-registration.png');
   height: 100vh;
   background-size: cover;
   background-position: center;
@@ -79,7 +79,7 @@ background-color: rgb(16, 128, 143);
   z-index: 999;
   text-align: center;
   padding: 60px 32px;
-  width: 370px;
+  width: 470px;
   transform: translate(-50%,-50%);
   background: rgba(255,255,255,0.04);
   box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
@@ -182,4 +182,16 @@ i span{
 }
 .signup a:hover{
   text-decoration: underline;
+}
+@media(max-width:740px){
+.content{
+  width: 370px;
+}
+}
+
+.validator small{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: rgb(116, 7, 7);
+  // font-weight: 500;
+  margin-left: 10px;
 }

@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   decodeData: any;
   greetingMessage: string;
   public myAngularxQrCode: string = 'null';
+  totalStudent: any;
   constructor(private apiService:ApiService,  private sharedService: SharedService) {}
 
   userDetailsArray: any[] = [];
@@ -25,6 +26,11 @@ export class DashboardComponent implements OnInit {
 
   dataAvailable: boolean = false;
  Eventlength:number=0;
+
+ totalReceivedAmount: number = 0;
+ totalSuccessPayment: number = 0;
+ totalPendingPayment: number = 0;
+
 
 
 
@@ -36,12 +42,14 @@ export class DashboardComponent implements OnInit {
 
       this.getUserData();
       this.getPaymentHistory();
+      this.calculateTotalReceivedAmount();
   }
 
   getUserData(){
 this.apiService.getAllUserData().subscribe(res=>{
   console.log(res);
   this.userDetailsArray=res;
+  this.totalStudent=res.length;
 })
 }
 
@@ -50,6 +58,29 @@ this.apiService.getAllUserData().subscribe(res=>{
       console.log(res);
       this.paymentHistoryArray=res;
     })
+  }
+
+  calculateTotalReceivedAmount(): void {
+    // Iterate through the payment history array
+    for (const paymentEntry of this.paymentHistoryArray) {
+      // Check if the payment entry has a paymentAmount property
+      if (paymentEntry.amount) {
+        // Add the payment amount to the totalReceivedAmount
+        this.totalReceivedAmount += paymentEntry.amount;
+      }
+    }
+    for (const paymentEntry of this.paymentHistoryArray) {
+      // Check if the payment entry has a paymentAmount property
+      if (paymentEntry.status=='paid') {
+        // Add the payment amount to the totalReceivedAmount
+        this.totalSuccessPayment += 1;
+      }else{
+        this.totalPendingPayment +=1;
+      }
+    }
+
+    // Now totalReceivedAmount contains the sum of all payment amounts
+    console.log('Total Received Amount:', this.totalReceivedAmount);
   }
 
 
