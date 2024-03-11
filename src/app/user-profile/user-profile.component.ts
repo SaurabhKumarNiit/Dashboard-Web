@@ -301,7 +301,7 @@ dataPayment:any={}
   }
 
   verifydata() { 
-   
+   this.registrationForm.value.totalAmount=this.billAmount;
       if(this.registrationForm.valid){
         this.service
         .registerCustomer({
