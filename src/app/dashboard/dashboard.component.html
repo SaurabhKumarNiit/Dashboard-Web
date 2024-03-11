@@ -45,7 +45,7 @@
                             <i class="material-icons">store</i>
                         </div>
                         <p class="card-category">Collected Amount</p>
-                        <h3 class="card-title">₹ {{totalReceivedAmount}}</h3>
+                        <h3 class="card-title">₹ {{totalReceivedAmount/100}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -61,7 +61,10 @@
                             <i class="material-icons">info_outline</i>
                         </div>
                         <p class="card-category">Pending Payments</p>
-                        <h3 class="card-title">{{totalPendingPayment}}</h3>
+                        <h3 class="card-title">{{totalPendingPayment }}
+                            <small> users</small>
+                         </h3>
+                       
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -77,7 +80,7 @@
                             <i class="fa fa-user"></i>
                         </div>
                         <p class="card-category">Total Students</p>
-                        <h3 class="card-title">{{totalStudent}}</h3>
+                        <h3 class="card-title">{{totalStudent }} <small>students</small></h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -187,7 +190,7 @@
                                   <tr>
                                       <td>{{ i + 1 }}.</td>
                                       <td>{{ info.orderId }}</td>
-                                      <td>{{ info.amount}}</td>
+                                      <td>{{ info.amount / 100}}</td>
                                       <td>{{ info.status}}</td>
                                       <td>{{ info.email}}</td>
                                       <td><a routerLink="{{ info._id }}"><img src="https://cdn2.iconfinder.com/data/icons/picol-vector/32/view-512.png" width="23px" alt=""></a></td>

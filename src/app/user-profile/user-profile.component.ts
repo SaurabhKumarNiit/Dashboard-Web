@@ -47,7 +47,7 @@ paymentState:boolean=false;
   customerName:any;
   MobileNo:any;
   readyToVerify:boolean=false;
-  readyToPay:boolean=false;
+  readyToPay:boolean=true;
   hideToPay:boolean=true;
 
   isLoading: boolean = false;
@@ -444,7 +444,7 @@ dataPayment:any={}
   
   $.ajax(
     {
-      url:'https://talented-kick-production.up.railway.app/payment/create_order/'+(this.userEmail),
+      url:'http://localhost:8181/payment/create_order/'+(this.userEmail),
       data:JSON.stringify({amount:amount,info:'order_request'}),
       contentType:'application/json',
       type:'POST',
@@ -530,7 +530,7 @@ dataPayment:any={}
     const self = this; // Preserve the component context
   
     $.ajax({
-      url: 'https://talented-kick-production.up.railway.app/payment/update_order',
+      url: 'http://localhost:8181/payment/update_order',
       data: JSON.stringify({ payment_id: payment_id, order_id: order_id, status: status }),
       contentType: 'application/json',
       type: 'POST',

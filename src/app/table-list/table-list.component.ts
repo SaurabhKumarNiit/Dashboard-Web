@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../Services/api-service.service';
+import { SharedService } from '../Services/shared.service';
 
 @Component({
   selector: 'app-table-list',
@@ -6,10 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
+  storedEvents: any;
 
-  constructor() { }
+  nodata:boolean=false;
+  constructor(private apiService:ApiService,  private sharedService: SharedService) {}
 
   ngOnInit() {
+    // sessionStorage.setItem('email', 'sktiwari1125@gmail.com');
+
+    this.getSearchResults()
   }
 
+  getSearchResults(): void {
+    const email=sessionStorage.getItem('email');
+ this.apiService.getPaymentHistoryByEmail(email).subscribe(res=>{
+  console.log(res)
+  if(res==null){
+  this.nodata=true;
+  console.log(this.nodata);
+  }else{
+    this.nodata=false;
+  }
+  this.storedEvents=res;
+ })}
 }

@@ -95,7 +95,7 @@ export class LoginComponent {
       this.data = res;
       // this.accessToken = res.headers.get('Verification');
       // console.log(this.accessToken);
-      sessionStorage.setItem('email', this.loginUser.sEmail);
+      sessionStorage.setItem('adminEmail', this.loginForm.value.email);
 
       Swal.fire({
         title: 'Admin Login Successfully',
@@ -140,7 +140,7 @@ export class LoginComponent {
         this.data = res;
         // this.accessToken = res.headers.get('Verification');
         // console.log(this.accessToken);
-        sessionStorage.setItem('email', this.loginUser.sEmail);
+        sessionStorage.setItem('email', this.loginForm.value.email);
 
         Swal.fire({
           title: 'Student Login Successfully',

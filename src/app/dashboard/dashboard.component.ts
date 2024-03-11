@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   greetingMessage: string;
   public myAngularxQrCode: string = 'null';
   totalStudent: any;
+  newAmount: number;
   constructor(private apiService:ApiService,  private sharedService: SharedService) {}
 
   userDetailsArray: any[] = [];
@@ -42,7 +43,6 @@ export class DashboardComponent implements OnInit {
 
       this.getUserData();
       this.getPaymentHistory();
-      this.calculateTotalReceivedAmount();
   }
 
   getUserData(){
@@ -52,36 +52,39 @@ this.apiService.getAllUserData().subscribe(res=>{
   this.totalStudent=res.length;
 })
 }
+newTotalAmount: number[];
+newPaymentStatus: number[];
 
+
+finalValue:number=0;
   getPaymentHistory(){
     this.apiService.getPaymentHistory().subscribe(res=>{
-      console.log(res);
+      this.newTotalAmount=res.map(value=>{return value.totalAmount});
+      console.log(this.newTotalAmount);
       this.paymentHistoryArray=res;
+
+    this.newTotalAmount.forEach(value=>{
+   
+    this.finalValue+=value})
+    console.log(this.finalValue)
+    this.totalReceivedAmount=this.finalValue;
+    this.newPaymentStatus=res.map(value=>{return value.status});
+
+    console.log(this.newPaymentStatus);
+    this.newPaymentStatus.forEach(value=>{
+      if (typeof value === 'string' && value === "paid") {
+        this.totalSuccessPayment += 1;
+      } else {
+        this.totalPendingPayment += 1;
+      }
+    })
     })
   }
 
-  calculateTotalReceivedAmount(): void {
-    // Iterate through the payment history array
-    for (const paymentEntry of this.paymentHistoryArray) {
-      // Check if the payment entry has a paymentAmount property
-      if (paymentEntry.amount) {
-        // Add the payment amount to the totalReceivedAmount
-        this.totalReceivedAmount += paymentEntry.amount;
-      }
-    }
-    for (const paymentEntry of this.paymentHistoryArray) {
-      // Check if the payment entry has a paymentAmount property
-      if (paymentEntry.status=='paid') {
-        // Add the payment amount to the totalReceivedAmount
-        this.totalSuccessPayment += 1;
-      }else{
-        this.totalPendingPayment +=1;
-      }
-    }
+  // amountConvert(amount:any){
+  //   this.newAmount=amount/100
+  // }
 
-    // Now totalReceivedAmount contains the sum of all payment amounts
-    console.log('Total Received Amount:', this.totalReceivedAmount);
-  }
 
 
   setGreetingMessage() {

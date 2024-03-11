@@ -74,6 +74,10 @@ export class ApiService {
     return this.http.get<any>(`${this.baseurl}/allHistory`);
   }
 
+  getPaymentHistoryByEmail(email:any): Observable<any> {
+    return this.http.get<any>(`${this.baseurl}/allHistory/${email}`);
+  }
+
   uploadVideo(data: any) {
     return this.http.post(`${this.baseurl}/videoUpload`, data);
   }
