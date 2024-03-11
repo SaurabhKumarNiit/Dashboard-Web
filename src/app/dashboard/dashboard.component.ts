@@ -59,7 +59,13 @@ newPaymentStatus: number[];
 finalValue:number=0;
   getPaymentHistory(){
     this.apiService.getPaymentHistory().subscribe(res=>{
-      this.newTotalAmount=res.map(value=>{return value.totalAmount});
+      this.newTotalAmount=res.map(value=>{
+        if(value.status=='paid'){
+          return value.totalAmount;
+        }else{
+          return 0;
+        }
+        });
       console.log(this.newTotalAmount);
       this.paymentHistoryArray=res;
 

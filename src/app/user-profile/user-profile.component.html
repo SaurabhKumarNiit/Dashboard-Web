@@ -13,10 +13,10 @@
                   </button> -->
           <mat-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="otpForm">
-<div class="fade-in"    *ngIf="!isLoading">
-  <section >
-    <div class="container-fluid">
-      <!-- <div class="card" style="height: 70px;">
+              <div class="fade-in" *ngIf="!isLoading">
+                <section>
+                  <div class="container-fluid">
+                    <!-- <div class="card" style="height: 70px;">
         <div class="card-header card-header-tabs card-header" style="background-color: #ebcb45;">
           <div class="nav-tabs-navigation">
             <div class="nav-tabs-wrapper">
@@ -25,81 +25,83 @@
           </div>
         </div>
       </div> -->
-      <form class="mainForm" [formGroup]="registrationForm" (ngSubmit)="verifydata()">
-        <div class="details ID">
-          <!-- <span class="title">Basic Details</span> -->
-          <div class="fields">
-            <div class="input-field">
-              <label for="name">Student Name *</label>
-              <input type="text" id="sName" formControlName="studentName" placeholder="Student Name" required />
-              <small class="small" *ngIf="
+     
+                    <form class="mainForm" [formGroup]="registrationForm" (ngSubmit)="verifydata()">
+                      <div class="details ID">
+                        <!-- <span class="title">Basic Details</span> -->
+                        <div class="fields">
+                          <div class="input-field">
+                            <label for="name">Student Name *</label>
+                            <input type="text" id="sName" formControlName="studentName" placeholder="Student Name"
+                              required />
+                            <small class="small" *ngIf="
                   registrationForm.get('studentName')?.invalid &&
                   registrationForm.get('studentName')?.touched
                 " class="error-message">
-                Student Name is required.
-              </small>
-            </div>
+                              Student Name is required.
+                            </small>
+                          </div>
 
-            <div class="input-field">
-              <label for="name">Email *</label>
-              <input type="email" id="email" formControlName="email" placeholder="Email" required />
-              <small class="small" *ngIf="
+                          <div class="input-field">
+                            <label for="name">Email *</label>
+                            <input type="email" id="email" formControlName="email" placeholder="Email" required />
+                            <small class="small" *ngIf="
                   registrationForm.get('email')?.invalid &&
                   registrationForm.get('email')?.touched
                 " class="error-message">
-                Email is required.
-              </small>
-            </div>
+                              Email is required.
+                            </small>
+                          </div>
 
-            <div class="input-field">
-              <label for="parentName" class="file-label"> Parent Name  </label>
-                <input type="text" id="parentName" formControlName="parentName" placeholder="Parent Name" />
-            
-            </div>
+                          <div class="input-field">
+                            <label for="parentName" class="file-label"> Parent Name </label>
+                            <input type="text" id="parentName" formControlName="parentName" placeholder="Parent Name" />
 
-
-            <div class="input-field">
-              <label for="demoTime">Demo Time </label>
-              <input type="time" id="demoTime" formControlName="demoTime" placeholder="demoTime"/>
-            </div>
+                          </div>
 
 
-            <div class="input-field">
-              <label for="yearOfStudy">Year Of Study </label>
-              <input type="date" id="yearOfStudy" formControlName="yearOfStudy"/>
-            </div>
+                          <div class="input-field">
+                            <label for="demoTime">Demo Time </label>
+                            <input type="time" id="demoTime" formControlName="demoTime" placeholder="demoTime" />
+                          </div>
 
-              <div class="input-field">
-                <label for="phoneNo">Phone Number</label>
-                <input type="number" id="phoneNo" formControlName="phoneNo"
-                  placeholder="Phone Number" required/>
+
+                          <div class="input-field">
+                            <label for="yearOfStudy">Year Of Study </label>
+                            <input type="date" id="yearOfStudy" formControlName="yearOfStudy" />
+                          </div>
+
+                          <div class="input-field">
+                            <label for="phoneNo">Phone Number</label>
+                            <input type="number" id="phoneNo" formControlName="phoneNo" placeholder="Phone Number"
+                              required />
+                          </div>
+
+                          <div class="input-field">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" formControlName="address" />
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div style="display: flex; justify-content: center">
+                        <button type="submit">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </section>
               </div>
 
-            <div class="input-field">
-              <label for="address">Address</label>
-              <input type="text" id="address" formControlName="address"/>
-            </div>
+              <div style="margin-top: 40px;" *ngIf="isLoading">
+                <h3 style="text-align: center; color: blueviolet;">Submit Your OTP</h3>
+                <form class="mainForm" [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+                  <div class="fields">
 
-          </div>
-        </div>
-
-        <div style="display: flex; justify-content: center">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
-  </section>
-</div>
-
-<div style="margin-top: 40px;"  *ngIf="isLoading">
-  <h3 style="text-align: center; color: blueviolet;">Submit Your OTP</h3>
-  <form class="mainForm" [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
-    <div class="fields">
-
-      <div  class="input-fielde">
-        <!-- <label for="otp">Enter Otp</label> -->
-        <div style="display: flex; justify-content: center;">
-          <input style="
+                    <div class="input-fielde">
+                      <!-- <label for="otp">Enter Otp</label> -->
+                      <div style="display: flex; justify-content: center;">
+                        <input style="
           width: 300px; 
          outline: none;
           font-size: 14px;
@@ -108,26 +110,27 @@
           border-radius: 10px;
           border: 1px solid #111;
           padding: 0 25px;
-          height: 42px;"  placeholder="Enter OTP" type="number" formControlName="otp"  required  (change)="onOtpVerify()">
-        </div>
-        <span class="validator" *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
-          <small *ngIf="otpValidation.otp.errors.required">OTP is required.<br></small>
-          <small *ngIf="otpValidation.otp.errors.minlength">OTP must be at least 4 numbers long.</small>
-        </span>
-      </div>
+          height: 42px;" placeholder="Enter OTP" type="number" formControlName="otp" required (change)="onOtpVerify()">
+                      </div>
+                      <span class="validator"
+                        *ngIf="otpValidation.otp.invalid && (otpValidation.otp.dirty || otpValidation.otp.touched)">
+                        <small *ngIf="otpValidation.otp.errors.required">OTP is required.<br></small>
+                        <small *ngIf="otpValidation.otp.errors.minlength">OTP must be at least 4 numbers long.</small>
+                      </span>
+                    </div>
 
-   
 
-      <div style="display: flex; justify-content: center">
-        <button type="submit"  >Submit OTP</button>
-      </div>
 
-    </div>
-  </form>
+                    <div style="display: flex; justify-content: center">
+                      <button type="submit">Submit OTP</button>
+                    </div>
 
-  <button  style="width: 300px; display: none;" mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
 
-</div>
+                <button style="width: 300px; display: none;" mat-button matStepperNext>Next</button>
+
+              </div>
 
               <!-- <div class="mainpage">
                 <nav>
@@ -294,8 +297,8 @@
             </mat-step> -->
             <mat-step>
               <ng-template matStepLabel>Done</ng-template>
-              <div *ngIf="!readyToPay" >
-            <h2>Please Fill Correct OTP to Generate Payment request</h2>
+              <div *ngIf="!readyToPay">
+                <h2>Please Fill Correct OTP to Generate Payment request</h2>
               </div>
               <div class="payment" *ngIf="readyToPay">
                 <h2>Payment Details</h2>
@@ -318,9 +321,12 @@
                   <div class="form-controls">
 
                     <mat-radio-group class="radioGroup" [(ngModel)]="billAmount">
-                      <mat-radio-button (change)="updateBillAmount(12000)" class="example-margin" value="12000">Pre-book for 12 classes</mat-radio-button>
-                      <mat-radio-button (change)="updateBillAmount(25000)" class="example-margin" value="25000">Pre-book for 25 classes</mat-radio-button>
-                      <mat-radio-button (change)="updateBillAmount(30000)" class="example-margin" value="30000">Pre-book for 30 classes</mat-radio-button>
+                      <mat-radio-button (change)="updateBillAmount(12000)" class="example-margin" value="12000">Pre-book
+                        for 12 classes</mat-radio-button>
+                      <mat-radio-button (change)="updateBillAmount(25000)" class="example-margin" value="25000">Pre-book
+                        for 25 classes</mat-radio-button>
+                      <mat-radio-button (change)="updateBillAmount(30000)" class="example-margin" value="30000">Pre-book
+                        for 30 classes</mat-radio-button>
                     </mat-radio-group>
                     <!-- <span>
                       <input type="radio" id="12_class" name="pre_book" value="12000"
@@ -349,33 +355,29 @@
                       </p>
                     </div> -->
 
-                    <p style="font-size: 12px;">Your Total Amount, You can all update your amount according your requirment.</p>
+                    <p style="font-size: 12px;">Your Total Amount, You can all update your amount according your
+                      requirment.</p>
                     <div class="amount-input">
-                      <input
-                      style="font-weight: bold; font-size: large; border: none;"
-                      matInput
-                      placeholder="Enter Your Amount"
-                      type="text"
-                      [(ngModel)]="billAmount"
-                      (input)="onInputChange()"
-                    >
+                      <input style="font-weight: bold; font-size: large; border: none;" matInput
+                        placeholder="Enter Your Amount" type="text" [(ngModel)]="billAmount" (input)="onInputChange()">
                     </div>
                   </div>
 
                   <div class="additional">
-                  
-                       <button (click)="updateBillAmount(additionalAmount.amount0)" >₹ {{additionalAmount.amount0}}</button>
-                       <button (click)="updateBillAmount(additionalAmount.amount1)" >₹ {{additionalAmount.amount1}}</button>
-                       <button (click)="updateBillAmount(additionalAmount.amount2)" >₹ {{additionalAmount.amount2}}</button>
-                       <button (click)="updateBillAmount(additionalAmount.amount3)" >₹ {{additionalAmount.amount3}}</button>
-                       <button (click)="updateBillAmount(additionalAmount.amount4)" >₹ {{additionalAmount.amount4}}</button>
-                       <button (click)="updateBillAmount(additionalAmount.amount5)" >Custom Amount</button>
+
+                    <button (click)="updateBillAmount(additionalAmount.amount0)">₹ {{additionalAmount.amount0}}</button>
+                    <button (click)="updateBillAmount(additionalAmount.amount1)">₹ {{additionalAmount.amount1}}</button>
+                    <button (click)="updateBillAmount(additionalAmount.amount2)">₹ {{additionalAmount.amount2}}</button>
+                    <button (click)="updateBillAmount(additionalAmount.amount3)">₹ {{additionalAmount.amount3}}</button>
+                    <button (click)="updateBillAmount(additionalAmount.amount4)">₹ {{additionalAmount.amount4}}</button>
+                    <button (click)="updateBillAmount(additionalAmount.amount5)">Custom Amount</button>
 
                   </div>
 
-                  
 
-                  <button mat-raised-button color="primary" (click)="onSubmit()" disabled="{{isInputEmpty}}">CheckOut Now</button>
+
+                  <button mat-raised-button color="primary" (click)="onSubmit()" disabled="{{isInputEmpty}}">CheckOut
+                    Now</button>
 
                   <div *ngIf="paymentState" style="text-align: center;">
 
@@ -406,4 +408,3 @@
     </div>
   </div>
 </div>
-

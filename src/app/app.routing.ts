@@ -8,6 +8,7 @@ import { QRDisplay } from './qr-display/qr.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CreateEventsComponent } from './events/create-events.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes =[
   {
@@ -30,6 +31,10 @@ const routes: Routes =[
   {
     path: 'thank-you',
     component: CreateEventsComponent
+  },
+  {
+    path: 'thank-you-user',
+    component: NotificationsComponent
   }
   ,
   {

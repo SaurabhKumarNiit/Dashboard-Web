@@ -9,6 +9,7 @@ import { PaypalService } from '../Services/paypal.service';
 import { CurrencyService } from '../Services/currency.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -22,7 +23,7 @@ export class UserProfileComponent implements OnInit {
 
   checkoutDisable:boolean=true;
   usdAmount: number=0;
-  isLinear = false;
+  isLinear = true;
   durationInSeconds = 5;
   otpCheck=true;
   constructor(
@@ -34,7 +35,8 @@ export class UserProfileComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    private renderer2:Renderer2
+    private renderer2:Renderer2,
+    private http: HttpClient,
     // private sharedService:SharedService
   ) {}
 isEditable:boolean = false;
@@ -420,7 +422,7 @@ dataPayment:any={}
   }
 
   paymentConfirm() { 
-    this.paymentStart();
+    this.paymentStart(this.router);
 
   }
 
@@ -436,15 +438,19 @@ dataPayment:any={}
   //   });
   // }
 
+  thankYou(){
+    this.router.navigateByUrl('thank-you-user');
+  }
 
-  paymentStart(){
+  paymentStart(urlRoutes:Router){
+
     console.log("payment started --")
     let amount= this.billAmount;
     console.log(amount);
   
   $.ajax(
     {
-      url:'http://localhost:8181/payment/create_order/'+(this.userEmail),
+      url:'https://talented-kick-production.up.railway.app/payment/create_order/'+(this.userEmail),
       data:JSON.stringify({amount:amount,info:'order_request'}),
       contentType:'application/json',
       type:'POST',
@@ -530,14 +536,14 @@ dataPayment:any={}
     const self = this; // Preserve the component context
   
     $.ajax({
-      url: 'http://localhost:8181/payment/update_order',
+      url: 'https://talented-kick-production.up.railway.app/payment/update_order',
       data: JSON.stringify({ payment_id: payment_id, order_id: order_id, status: status }),
       contentType: 'application/json',
       type: 'POST',
       dataType: 'json',
       success: function (response) {
         console.log(response);
-        self.router.navigateByUrl('https://saurabhkumarniit.github.io/Dashboard-Web/#/thank-you');
+        urlRoutes.navigateByUrl('thank-you-user');
         self._snackBar.open('Payment Success', 'Close', {
           duration: 1000,
           panelClass: ['success-snackbar'],
@@ -554,10 +560,7 @@ dataPayment:any={}
         });
       },
     });
-  }
-  
-  
-  
+  }  
   };
 
 }

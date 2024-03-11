@@ -13,28 +13,30 @@
     </div>
     </div>
 
-    <div >
-      <div *ngIf="!nodata">
-          <div class="event-container" >
-            <a style="color: rgba(0, 0, 0, 0.866);"  class="event-box">
-              <strong>{{ storedEvents.orderId }}</strong>
-              <p>Payment Status: {{ storedEvents.status }}</p>
-              <p>Amount Paid: {{ storedEvents.totalAmount/100 }}</p>
-              <p>Email: {{ storedEvents.email}}</p>
-              <!-- Add more properties as needed -->
-            </a>
-          </div>
+  <div>
+    <div *ngIf="storedEvents?.length; else noResults">
+        <div class="event-container" *ngFor="let result of storedEvents">
+          <a style="color: rgba(0, 0, 0, 0.866);" routerLink="{{result._id}}" class="event-box">
+            <strong>{{ result.orderId }}</strong>
+            <p>Status : {{ result.status}}</p>
+            <p>Amount : {{ result.totalAmount/100  }}</p>
+            <!-- <p>Email : {{ result.email}}</p> -->
+            <!-- Add more properties as needed -->
+          </a>
         </div>
-  </div>
-        
-        <div *ngIf="nodata">
-          <div style="text-align: center;">
-            <h2 style="color: blueviolet;">No Payment History Yet!</h2>
-            <h5 style="color: blueviolet;">Create New payment then come back...</h5>
+      </div>
+</div>
+
       
-            <img src="https://www.pngall.com/wp-content/uploads/15/Payment-PNG-Image-HD.png" width="380px" alt="">
-          </div>
+      <ng-template #noResults>
+        <div style="text-align: center;">
+          <h2 style="color: blueviolet;">No Payment History Yet!</h2>
+          <h5 style="color: blueviolet;">Create New payment then come back...</h5>
+    
+          <img src="https://www.pngall.com/wp-content/uploads/15/Payment-PNG-Image-HD.png" width="380px" alt="">
         </div>
+      </ng-template>
+     
 
 
 
