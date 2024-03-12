@@ -1,23 +1,57 @@
 <div class="header">
-    <div class="container-fluid">
-      <div class="card" style="height: 70px;">
+  <div class="container-fluid">
+    <div class="card" style="height: 70px">
       <div class="card-header card-header-tabs card-header-primary">
-          <div class="nav-tabs-navigation">
-              <div class="nav-tabs-wrapper" >
-                  <span class="nav-tabs-title" >Check your<strong style="font-size: larger; margin-left: 10px;">Upcoming Payment</strong></span>
-  
-                  <ul class="nav nav-tabs" data-tabs="tabs" style="justify-content: end;"  >
-                  </ul>
-              </div>
+        <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+            <span class="nav-tabs-title"
+              >Check your<strong style="font-size: larger; margin-left: 10px"
+                >Upcoming Payment</strong
+              ></span
+            >
+
+            <ul
+              class="nav nav-tabs"
+              data-tabs="tabs"
+              style="justify-content: end"
+            ></ul>
           </div>
-      </div>
-      </div>
-
-      <div style="text-align: center;">
-        <h2 style="color: blueviolet;">No Upcoming Payment Yet!</h2>
-        <h5 style="color: blueviolet;">Create New payment then come back...</h5>
-
-        <img src="https://www.pngall.com/wp-content/uploads/5/Online-Payment-PNG-Pic.png" width="380px" alt="">
+        </div>
       </div>
     </div>
+
+    <div *ngIf="storedEvents && storedEvents.length > 0">
+      <!-- Set a flag to track if there are upcoming payments -->
+      <ng-container *ngIf="hasUpcomingPayments(storedEvents)">
+        <div class="event-container" *ngFor="let result of storedEvents">
+          <a
+            *ngIf="result.upcomingPayment > 0"
+            style="color: rgba(0, 0, 0, 0.866)"
+            routerLink="{{ result._id }}"
+            class="event-box"
+          >
+          <img src="https://static.vecteezy.com/system/resources/previews/017/196/576/original/notification-bell-icon-on-transparent-background-free-png.png" width="45px" height="40px" alt="">
+            <strong>Hello {{ result.studentName }}, you have an Upcoming Payment Of</strong>
+            <p>Amount: {{ result.upcomingPayment }} Rupees</p>
+          </a>
+        </div>
+      </ng-container>
+    
+      <ng-container *ngIf="!hasUpcomingPayments(storedEvents)">
+        <!-- Display this block only if there are no upcoming payments -->
+        <div style="text-align: center">
+          <h2 style="color: blueviolet">No Upcoming Payment Yet!</h2>
+          <h5 style="color: blueviolet">Create a new payment, then come back...</h5>
+          <img
+            src="https://www.pngall.com/wp-content/uploads/5/Online-Payment-PNG-Pic.png"
+            width="380px"
+            alt=""
+          />
+        </div>
+      </ng-container>
+    </div>
+    
+
+
   </div>
+</div>

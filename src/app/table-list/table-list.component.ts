@@ -21,7 +21,7 @@ export class TableListComponent implements OnInit {
 
   getSearchResults(): void {
     const email=sessionStorage.getItem('email');
- this.apiService.getPaymentHistoryByEmail(email).subscribe(res=>{
+ this.apiService.getPaymentHistoryByEmail('sktiwari1125@gmail.com').subscribe(res=>{
   console.log(res)
   if(res==null){
   this.nodata=true;

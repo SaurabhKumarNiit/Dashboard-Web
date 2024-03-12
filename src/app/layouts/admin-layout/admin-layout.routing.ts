@@ -9,6 +9,8 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { AuthGuard } from '../../guard/auth.guard';
+import { SelectedEventComponent } from '../../selected-event/selected-event.component';
+import { InvoiceComponent } from '../../invoice/invoice.component';
 // import { CreateEventsComponent } from 'app/events/create-events.component';
 
 export const AdminLayoutRoutes: Routes = [
@@ -55,7 +57,8 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'dashboard',      component: DashboardComponent },
-    // { path: 'dashboard/add-event',component: CreateEventsComponent },
+    { path: 'invoice', component: InvoiceComponent },
+    { path: 'dashboard/:_id',component: SelectedEventComponent },
     { path: 'user-profile',   component: UserProfileComponent, canActivate: [AuthGuard]},
     { path: 'table-list',     component: TableListComponent , canActivate: [AuthGuard]},
     { path: 'typography',     component: TypographyComponent , canActivate: [AuthGuard]},

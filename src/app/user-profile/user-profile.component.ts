@@ -316,6 +316,7 @@ dataPayment:any={}
         .subscribe(
           (data) => {
             console.log(data);
+            localStorage.setItem('userId',data._id);
             localStorage.setItem('email',data.email);
             this.billAmount=data.totalAmount;
             this.userEmail=data.email;

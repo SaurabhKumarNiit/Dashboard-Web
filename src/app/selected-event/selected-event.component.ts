@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { ApiService } from 'app/Services/api-service.service';
+import { ApiService } from '../Services/api-service.service';
 
 @Component({
   selector: 'app-selected-event',
@@ -26,44 +26,44 @@ export class SelectedEventComponent {
   constructor(private apiService:ApiService,private activateRoute: ActivatedRoute,private router:Router){}
     ngOnInit(): void {
 
-      this.authToken = localStorage.getItem('token');
-      this.decodeData=jwtDecode(this.authToken as string);
+      // this.authToken = localStorage.getItem('token');
+      // this.decodeData=jwtDecode(this.authToken as string);
     
-      // this.activateRoute.paramMap.subscribe(params => {
-      //  this.itemId = params.get('_id') ??'';
-      //   console.log(this.itemId);
-      //   this.apiService.getEventsFields(this.itemId,this.authToken).subscribe((data) => {
-      //     console.log(data.body.event)
-      //     this.eventObject = data.body.event;  
-      //     console.log(this.eventObject)  
+      this.activateRoute.paramMap.subscribe(params => {
+       this.itemId = params.get('_id') ??'';
+        console.log(this.itemId);
+        this.apiService.getEachUserData(this.itemId).subscribe((data) => {
+          console.log(data)
+          this.eventObject = data;  
+          console.log(this.eventObject)  
           
-      //   });
-      // });
+        });
+      });
     }
 
 
 
     updateEvent() {
-      // Swal.fire({
-      //   title: "Do you want to save the changes in Event?",
-      //   showDenyButton: true,
-      //   showCancelButton: true,
-      //   confirmButtonText: "Save",
-      //   denyButtonText: `Don't save`
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     this.apiService.UpdateEvent(this.itemId, this.eventObject,this.authToken).subscribe((data) => {
-      //       console.log(data)
-      //       console.log('Update event clicked'); 
-      //     });
-      //     Swal.fire("Event Updated!", "", "success");
-      //     setTimeout(() => {
-      //       this.router.navigateByUrl('');         
-      //      }, 2000);
-      //   } else if (result.isDenied) {
-      //     Swal.fire("Changes are not saved", "", "info");
-      //   }
-      // });
+      Swal.fire({
+        title: "Do you want to save the changes in Payment?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.apiService.updateData(this.eventObject,this.itemId).subscribe((data) => {
+            console.log(data)
+            console.log('Upcoming Payment Send!'); 
+          });
+          Swal.fire("Upcoming Payment Send!", "", "success");
+          setTimeout(() => {
+            this.router.navigateByUrl('');         
+           }, 2000);
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
     }
 
   

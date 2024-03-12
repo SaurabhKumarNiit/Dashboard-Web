@@ -60,7 +60,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    // SelectedEventComponent,
+    SelectedEventComponent,
     CreateEventsComponent,
     QRDisplay
   ]

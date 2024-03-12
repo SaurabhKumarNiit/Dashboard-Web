@@ -1,4 +1,4 @@
-<!-- <section class="container">
+<section class="container">
     <div class="card" style="height: 80px;">
         <div class="card-header card-header-tabs card-header-danger">
             <div class="nav-tabs-navigation">
@@ -10,73 +10,47 @@
         </div>
         <form action="#" class="form">
             <div class="input-field">
-                <label>Event Name:</label>
-                <input matInput [(ngModel)]="eventObject.sName" name="sName" type="text" >
+                <label>Student Name :</label>
+                <input matInput [(ngModel)]="eventObject.studentName" name="studentName" type="text" >
             </div>
 
             <div class="input-field">
-                <label>Description:</label>
-                <input matInput [(ngModel)]="eventObject.sDescription" name="sDescription" type="text" >
+                <label>Email :</label>
+                <input matInput [(ngModel)]="eventObject.email" name="email" type="email" >
+            </div>
+
+            <div class="input-field">
+                <label>Year Of Study:</label>
+                <input matInput [(ngModel)]="eventObject.yearOfStudy" name="yearOfStudy" type="text" >
             </div>
        
                 <div class="input-field">
-                    <label>Start Date:</label>
-                    <input matInput [(ngModel)]="eventObject.dStartDate"  name="dStartDate" type="text" >
+                    <label>Address :</label>
+                    <input matInput [(ngModel)]="eventObject.address"  name="address" type="text" >
                 </div>
 
                 <div class="input-field">
-                    <label>End Date:</label>
-                    <input matInput [(ngModel)]="eventObject.dEndDate" name="dEndDate" type="text" >
+                    <label>Demo Time :</label>
+                    <input matInput [(ngModel)]="eventObject.demoTime" name="demoTime" type="text" >
                 </div>
 
                 <div class="input-field">
-                    <label>Start Time:</label>
-                    <input matInput [(ngModel)]="eventObject.sStartTime" name="sStartTime" type="text" >
+                    <label>Phone No:</label>
+                    <input matInput [(ngModel)]="eventObject.phoneNo" name="phoneNo" type="number" >
                 </div>
 
                 <div class="input-field">
-                    <label>End Time:</label>
-                    <input matInput [(ngModel)]="eventObject.sEndTime" name="sEndTime" type="text" >
+                    <label>Set Up-coming Payment:</label>
+                    <input matInput [(ngModel)]="eventObject.upcomingPayment" name="upcomingPayment" type="number" >
                 </div>
 
-                <div class="input-field">
-                    <label>Registration Starts:</label>
-                    <input matInput [(ngModel)]="eventObject.dRegistrationOpens" name="dRegistrationOpens" type="text" >
-                </div>
-
-                <div class="input-field">
-                    <label>Registration Closes</label>
-                    <input matInput [(ngModel)]="eventObject.dRegistrationCloses" name="dRegistrationCloses" type="text" >
-                </div>
-
-                <div class="input-field">
-                    <label>Location Physical:</label>
-                    <input matInput [(ngModel)]="eventObject.sLocationPhysical" name="sLocationPhysical" type="text" >
-                </div>
-
-                <div class="input-field">
-                    <label>Cost Description:</label>
-                    <input matInput [(ngModel)]="eventObject.sCostDescription" name="sCostDescription" type="text" >
-                </div>
-
-                <div class="input-field" >
-                    <label>Location Coordinates:</label>
-                    <div style="display: flex;">
-                        <input matInput [(ngModel)]="eventObject.locCoordinates.type" name="locCoordinates.type" type="text" >
-                        <input matInput [(ngModel)]="eventObject.locCoordinates.coordinates" name="locCoordinates.coordinates" type="text" >
-                    </div>
-                </div>
-
-                <div class="input-field">
-                    <label>Location Digital:</label>
-                    <input matInput [(ngModel)]="eventObject.sLocationDigital" name="sLocationDigital" type="text" >
-                </div>
+         
 
         </form>
 
         <div class="funcButton">
-            <button mat-raised-button color="primary" (click)="updateEvent()" >Update Event</button>
-            <button mat-flat-button color="accent" routerLink="/qr" >Present Mode</button>
-            <button mat-flat-button color="warn" (click)="deleteEvent()" >Delete Event</button>
+            <button mat-raised-button color="primary" (click)="updateEvent()" >Send Upcoming Payment</button>
+            <!-- <button mat-flat-button color="accent" routerLink="/qr" >Mark as </button> -->
+            <button mat-flat-button color="warn" (click)="deleteEvent()" >Remove Student</button>
           </div>
-    </section> -->
+    </section>

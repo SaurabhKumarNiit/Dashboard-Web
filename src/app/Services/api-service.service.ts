@@ -17,8 +17,8 @@ export class ApiService {
   
   data: any;
 
-  baseurl = 'https://talented-kick-production.up.railway.app';
-  // baseurl='http://localhost:8181'
+  // baseurl = 'https://talented-kick-production.up.railway.app';
+  baseurl='http://localhost:8181'
  
 
   getEmail() {
@@ -68,6 +68,12 @@ export class ApiService {
 
   getAllUserData(): Observable<any> {
     return this.http.get<any>(`${this.baseurl}/userData`);
+  }
+  getEachUserData(_id:number): Observable<any> {
+    return this.http.get<any>(`${this.baseurl}/userData/${_id}`);
+  }
+  getUserDataByEmail(email:string): Observable<any> {
+    return this.http.get<any>(`${this.baseurl}/allData/${email}`);
   }
 
   getPaymentHistory(): Observable<any> {

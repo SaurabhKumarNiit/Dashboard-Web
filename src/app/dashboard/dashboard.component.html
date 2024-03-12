@@ -154,7 +154,7 @@
                               <th>Student Name</th>
                               <th>Email</th>
                               <th>Phone No</th>
-                              <th>Amount</th>
+                              <th>Upcoming Payment</th>
                               <th>View</th>
                           </thead>
                           <tbody *ngFor="let info of userDetailsArray; let i = index" id="data">
@@ -163,7 +163,7 @@
                                   <td>{{ info.studentName }}</td>
                                   <td>{{ info.email}}</td>
                                   <td>{{ info.phoneNo}}</td>
-                                  <td>{{ info.totalAmount}}</td>
+                                  <td>{{ info.upcomingPayment}}</td>
                                   <td><a routerLink="{{ info._id }}"><img src="https://cdn2.iconfinder.com/data/icons/picol-vector/32/view-512.png" width="23px" alt=""></a></td>
                               </tr>
                           </tbody>
